@@ -20,7 +20,7 @@ const Dashboard = () => {
         {icon}
       </CardHeader>
       <CardContent>
-        <div className="space-y-2 text-xs font-mono">
+        <div className="space-y-2 text-xs font-mono text-cyber-green-400">
           <p>Leading: {data.candidate}</p>
           <div className="flex justify-between items-center">
             <span>Probability:</span>
@@ -67,7 +67,7 @@ const Dashboard = () => {
             <AlertTriangle className="h-4 w-4 text-cyber-green-400" />
           </CardHeader>
           <CardContent>
-            <div className="space-y-2 text-xs font-mono">
+            <div className="space-y-2 text-xs font-mono text-cyber-green-400">
               <div className="flex justify-between items-center">
                 <span>Voter Turnout Prediction:</span>
                 <span>67%</span>
