@@ -1,18 +1,17 @@
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Label } from "@/components/ui/label";
-import { Switch } from "@/components/ui/switch";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Database, Globe, Clock, Cpu, FileJson, Rss } from 'lucide-react';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Database, Globe, Clock, Cpu, FileJson, Rss, Plus, Check } from 'lucide-react';
 import DataSourceList from './DataSourceList';
 import DataSourceForm from './DataSourceForm';
+import DataSourceWizard from './DataSourceWizard';
 
 const DataSources = () => {
   const [showAddForm, setShowAddForm] = useState(false);
+  const [isWizardOpen, setIsWizardOpen] = useState(false);
 
   const handleAddSource = (sourceData) => {
     console.log('New data source:', sourceData);
@@ -22,7 +21,23 @@ const DataSources = () => {
 
   return (
     <div className="container mx-auto px-4 py-6 bg-cyber-bg text-cyber-green-400">
-      <h1 className="text-2xl font-mono font-semibold mb-6">Data Sources</h1>
+      <div className="flex justify-between items-center mb-6">
+        <h1 className="text-2xl font-mono font-semibold">Data Sources</h1>
+        <Dialog open={isWizardOpen} onOpenChange={setIsWizardOpen}>
+          <DialogTrigger asChild>
+            <Button className="bg-cyber-green-700 text-cyber-black hover:bg-cyber-green-600">
+              <Plus className="h-4 w-4 mr-2" />
+              <span className="hidden sm:inline">Add New Source</span>
+            </Button>
+          </DialogTrigger>
+          <DialogContent className="bg-cyber-black border-cyber-green-700 text-cyber-green-400 w-full sm:max-w-[90vw] md:max-w-[80vw] lg:max-w-[70vw] xl:max-w-[60vw] h-[90vh] max-h-[90vh]">
+            <DialogHeader>
+              <DialogTitle className="text-cyber-green-400 text-xl font-mono">Add New Data Source</DialogTitle>
+            </DialogHeader>
+            <DataSourceWizard onComplete={() => setIsWizardOpen(false)} />
+          </DialogContent>
+        </Dialog>
+      </div>
       <Tabs defaultValue="overview" className="w-full">
         <TabsList className="grid w-full grid-cols-3 lg:grid-cols-6 bg-cyber-green-900 mb-4">
           <TabsTrigger value="overview" className="text-cyber-green-400 data-[state=active]:bg-cyber-green-700">
@@ -58,12 +73,6 @@ const DataSources = () => {
               </CardHeader>
               <CardContent>
                 <DataSourceList />
-                <Button 
-                  className="mt-4 bg-cyber-green-700 text-cyber-black hover:bg-cyber-green-600"
-                  onClick={() => setShowAddForm(true)}
-                >
-                  Add New Data Source
-                </Button>
               </CardContent>
             </Card>
           </TabsContent>
