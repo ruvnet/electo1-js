@@ -1,28 +1,31 @@
 import React from 'react';
-import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 const data = [
-  { name: 'Candidate A', probability: 0.65 },
-  { name: 'Candidate B', probability: 0.35 },
+  { name: 'Jan', CandidateA: 0.4, CandidateB: 0.6 },
+  { name: 'Feb', CandidateA: 0.45, CandidateB: 0.55 },
+  { name: 'Mar', CandidateA: 0.48, CandidateB: 0.52 },
+  { name: 'Apr', CandidateA: 0.52, CandidateB: 0.48 },
+  { name: 'May', CandidateA: 0.55, CandidateB: 0.45 },
+  { name: 'Jun', CandidateA: 0.58, CandidateB: 0.42 },
 ];
 
 const PredictionChart = () => {
   return (
-    <div className="bg-cyber-black p-4 rounded-sm border border-cyber-green-700">
-      <h2 className="text-sm font-mono font-semibold mb-2 text-cyber-green-400">Current Predictions</h2>
-      <ResponsiveContainer width="100%" height={200}>
-        <BarChart data={data}>
-          <CartesianGrid strokeDasharray="3 3" stroke="#1a4d2e" />
-          <XAxis dataKey="name" tick={{ fill: '#28ff47', fontSize: 10 }} />
-          <YAxis tick={{ fill: '#28ff47', fontSize: 10 }} />
-          <Tooltip
-            contentStyle={{ backgroundColor: '#0a0a0a', border: '1px solid #18992b' }}
-            labelStyle={{ color: '#28ff47' }}
-          />
-          <Bar dataKey="probability" fill="#28ff47" />
-        </BarChart>
-      </ResponsiveContainer>
-    </div>
+    <ResponsiveContainer width="100%" height={300}>
+      <LineChart data={data}>
+        <CartesianGrid strokeDasharray="3 3" stroke="#1a4d2e" />
+        <XAxis dataKey="name" stroke="#28ff47" />
+        <YAxis stroke="#28ff47" />
+        <Tooltip 
+          contentStyle={{ backgroundColor: '#0a0a0a', border: '1px solid #18992b' }}
+          labelStyle={{ color: '#28ff47' }}
+        />
+        <Legend />
+        <Line type="monotone" dataKey="CandidateA" stroke="#28ff47" activeDot={{ r: 8 }} />
+        <Line type="monotone" dataKey="CandidateB" stroke="#ff4747" activeDot={{ r: 8 }} />
+      </LineChart>
+    </ResponsiveContainer>
   );
 };
 
