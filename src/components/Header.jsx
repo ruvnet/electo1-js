@@ -17,8 +17,12 @@ const Header = ({ toggleSidebar, showLogo }) => {
               transition={{ duration: 0.5 }}
             >
               <Link to="/" className="flex items-center">
-                <img src="/placeholder.svg" alt="Logo" className="h-6 w-6 mr-2 filter invert" />
-                <span className="text-sm font-mono font-bold text-cyber-green-400">ElectionHack</span>
+                <svg className="h-6 w-6 mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="#28ff47" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M2 17L12 22L22 17" stroke="#28ff47" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M2 12L12 17L22 12" stroke="#28ff47" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+                <span className="text-sm font-mono font-bold text-cyber-green-400">Electro-1</span>
               </Link>
             </motion.div>
           )}
