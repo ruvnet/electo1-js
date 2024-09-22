@@ -7,7 +7,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { Database, Globe, Clock, Robot, FileJson, Rss } from 'lucide-react';
+import { Database, Globe, Clock, Cpu, FileJson, Rss } from 'lucide-react';
 import DataSourceList from './DataSourceList';
 import DataSourceForm from './DataSourceForm';
 
@@ -42,7 +42,7 @@ const DataSources = () => {
             <span className="hidden lg:inline">RSS Feeds</span>
           </TabsTrigger>
           <TabsTrigger value="ai" className="text-cyber-green-400 data-[state=active]:bg-cyber-green-700">
-            <Robot className="h-4 w-4 lg:mr-2" />
+            <Cpu className="h-4 w-4 lg:mr-2" />
             <span className="hidden lg:inline">AI Processing</span>
           </TabsTrigger>
           <TabsTrigger value="schedule" className="text-cyber-green-400 data-[state=active]:bg-cyber-green-700">
