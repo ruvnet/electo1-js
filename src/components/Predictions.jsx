@@ -1,20 +1,34 @@
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { Button } from "@/components/ui/button";
 import PredictionChart from './PredictionChart';
 import PredictionList from './PredictionList';
 import PredictionControlPanel from './PredictionControlPanel';
+import PredictionModal from './PredictionModal';
 
 const Predictions = () => {
   const [predictionParams, setPredictionParams] = useState({});
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleParamChange = (newParams) => {
     setPredictionParams({ ...predictionParams, ...newParams });
+  };
+
+  const handleGeneratePrediction = () => {
+    setIsModalOpen(true);
   };
 
   return (
     <div className="container mx-auto px-4 py-6 bg-cyber-bg text-cyber-green-400">
       <h1 className="text-xl font-mono font-semibold mb-4">Election Predictions</h1>
       <PredictionControlPanel onParamChange={handleParamChange} />
+      <div className="mt-4">
+        <Button onClick={handleGeneratePrediction} className="bg-cyber-green-700 text-cyber-black hover:bg-cyber-green-600">
+          Generate Prediction
+        </Button>
+      </div>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-6">
         <Card className="bg-cyber-black border-cyber-green-700">
           <CardHeader>
@@ -36,6 +50,7 @@ const Predictions = () => {
       <div className="mt-6">
         <PredictionList params={predictionParams} />
       </div>
+      <PredictionModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} params={predictionParams} />
     </div>
   );
 };
