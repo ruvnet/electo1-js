@@ -18,7 +18,7 @@ const Sidebar = ({ isOpen, toggleSidebar, showLogo }) => {
       <motion.nav
         className="mt-8"
         initial={{ opacity: 0, x: 50 }}
-        animate={{ opacity: isOpen && !showLogo ? 1 : 0, x: isOpen && !showLogo ? 0 : 50 }}
+        animate={{ opacity: isOpen ? 1 : 0, x: isOpen ? 0 : 50 }}
         transition={{ duration: 0.3, delay: 0.2 }}
       >
         <Link to="/" className="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 hover:text-white">
