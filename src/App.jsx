@@ -28,7 +28,6 @@ const App = () => {
           <div className="flex flex-col min-h-screen">
             <Header toggleSidebar={toggleSidebar} />
             <div className="flex flex-1">
-              <Sidebar isOpen={isSidebarOpen} />
               <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-4">
                 <Routes>
                   <Route path="/" element={<Dashboard />} />
@@ -37,6 +36,7 @@ const App = () => {
                   <Route path="/settings" element={<Settings />} />
                 </Routes>
               </main>
+              <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
             </div>
             <Footer />
           </div>
