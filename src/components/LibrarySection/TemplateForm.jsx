@@ -19,6 +19,9 @@ const TemplateForm = ({ item, onSave }) => {
       aiStrategy: {},
       predictionModel: {},
       dataSource: {},
+      socioeconomic: {},
+      cultural: {},
+      political: {},
     }
   });
 
@@ -74,42 +77,7 @@ const TemplateForm = ({ item, onSave }) => {
           </TabsList>
           <div className="mt-4 space-y-4">
             <TabsContent value="general">
-              <div className="space-y-4">
-                <div>
-                  <Label htmlFor="name" className="text-cyber-green-400">Name</Label>
-                  <Input
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    className="bg-cyber-bg text-cyber-green-400 border-cyber-green-700"
-                  />
-                </div>
-                <div>
-                  <Label htmlFor="type" className="text-cyber-green-400">Type</Label>
-                  <Select onValueChange={handleTypeChange} value={formData.type}>
-                    <SelectTrigger className="bg-cyber-bg text-cyber-green-400 border-cyber-green-700">
-                      <SelectValue placeholder="Select type" />
-                    </SelectTrigger>
-                    <SelectContent className="bg-cyber-black border-cyber-green-700">
-                      <SelectItem value="Agent Deployment" className="text-cyber-green-400">Agent Deployment</SelectItem>
-                      <SelectItem value="AI Strategy" className="text-cyber-green-400">AI Strategy</SelectItem>
-                      <SelectItem value="Prediction Model" className="text-cyber-green-400">Prediction Model</SelectItem>
-                      <SelectItem value="Data Source" className="text-cyber-green-400">Data Source</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
-                <div>
-                  <Label htmlFor="description" className="text-cyber-green-400">Description</Label>
-                  <Textarea
-                    id="description"
-                    name="description"
-                    value={formData.description}
-                    onChange={handleChange}
-                    className="bg-cyber-bg text-cyber-green-400 border-cyber-green-700"
-                  />
-                </div>
-              </div>
+              <GeneralFields formData={formData} handleChange={handleChange} handleTypeChange={handleTypeChange} />
             </TabsContent>
             <TabsContent value="agentDeployment">
               <AgentDeploymentFields formData={formData.data.agentDeployment} handleDataChange={handleDataChange} />
@@ -141,6 +109,45 @@ const TemplateForm = ({ item, onSave }) => {
     </form>
   );
 };
+
+const GeneralFields = ({ formData, handleChange, handleTypeChange }) => (
+  <div className="space-y-4">
+    <div>
+      <Label htmlFor="name" className="text-cyber-green-400">Name</Label>
+      <Input
+        id="name"
+        name="name"
+        value={formData.name}
+        onChange={handleChange}
+        className="bg-cyber-bg text-cyber-green-400 border-cyber-green-700"
+      />
+    </div>
+    <div>
+      <Label htmlFor="type" className="text-cyber-green-400">Type</Label>
+      <Select onValueChange={handleTypeChange} value={formData.type}>
+        <SelectTrigger className="bg-cyber-bg text-cyber-green-400 border-cyber-green-700">
+          <SelectValue placeholder="Select type" />
+        </SelectTrigger>
+        <SelectContent className="bg-cyber-black border-cyber-green-700">
+          <SelectItem value="Agent Deployment" className="text-cyber-green-400">Agent Deployment</SelectItem>
+          <SelectItem value="AI Strategy" className="text-cyber-green-400">AI Strategy</SelectItem>
+          <SelectItem value="Prediction Model" className="text-cyber-green-400">Prediction Model</SelectItem>
+          <SelectItem value="Data Source" className="text-cyber-green-400">Data Source</SelectItem>
+        </SelectContent>
+      </Select>
+    </div>
+    <div>
+      <Label htmlFor="description" className="text-cyber-green-400">Description</Label>
+      <Textarea
+        id="description"
+        name="description"
+        value={formData.description}
+        onChange={handleChange}
+        className="bg-cyber-bg text-cyber-green-400 border-cyber-green-700"
+      />
+    </div>
+  </div>
+);
 
 const AgentDeploymentFields = ({ formData, handleDataChange }) => (
   <div className="space-y-4">
