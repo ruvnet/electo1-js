@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { X, HomeIcon, BrainCircuitIcon, TerminalIcon, SettingsIcon, BarChartIcon, DatabaseIcon, UserIcon, BookIcon } from 'lucide-react';
+import { X, HomeIcon, BrainCircuitIcon, TerminalIcon, SettingsIcon, BarChartIcon, DatabaseIcon, UserIcon, BookIcon, Target } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -26,6 +26,7 @@ const Sidebar = ({ isOpen, toggleSidebar, showLogo }) => {
   const navItems = [
     { path: "/", icon: HomeIcon, label: "Dashboard" },
     { path: "/predictions", icon: BarChartIcon, label: "Predictions" },
+    { path: "/tactics", icon: Target, label: "Tactics" },
     { path: "/data-sources", icon: DatabaseIcon, label: "Data Sources" },
     { path: "/ai-interface", icon: BrainCircuitIcon, label: "AI Interface" },
     { path: "/control-console", icon: TerminalIcon, label: "Control Console" },
