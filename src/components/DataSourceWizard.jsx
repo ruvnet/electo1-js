@@ -5,6 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
+import { ScrollArea } from "@/components/ui/scroll-area";
 import { Globe, FileJson, Rss, Cpu, Clock, Check } from 'lucide-react';
 
 const DataSourceWizard = ({ onComplete }) => {
@@ -58,105 +59,107 @@ const DataSourceWizard = ({ onComplete }) => {
             </TabsTrigger>
           ))}
         </TabsList>
-        <TabsContent value="type" className="mt-4">
-          <Card className="bg-cyber-black border-cyber-green-700">
-            <CardHeader>
-              <CardTitle className="text-cyber-green-400">Select Data Source Type</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <Select onValueChange={(value) => handleInputChange('type', value)}>
-                <SelectTrigger className="bg-cyber-bg text-cyber-green-400 border-cyber-green-700">
-                  <SelectValue placeholder="Choose a data source type" />
-                </SelectTrigger>
-                <SelectContent className="bg-cyber-black border-cyber-green-700">
-                  <SelectItem value="web" className="text-cyber-green-400">Web Scraping</SelectItem>
-                  <SelectItem value="api" className="text-cyber-green-400">API</SelectItem>
-                  <SelectItem value="rss" className="text-cyber-green-400">RSS Feed</SelectItem>
-                  <SelectItem value="ai" className="text-cyber-green-400">AI Processing</SelectItem>
-                </SelectContent>
-              </Select>
-            </CardContent>
-          </Card>
-        </TabsContent>
-        <TabsContent value="details" className="mt-4">
-          <Card className="bg-cyber-black border-cyber-green-700">
-            <CardHeader>
-              <CardTitle className="text-cyber-green-400">Enter Source Details</CardTitle>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div>
-                <Label htmlFor="name" className="text-cyber-green-400">Source Name</Label>
-                <Input
-                  id="name"
-                  value={formData.name}
-                  onChange={(e) => handleInputChange('name', e.target.value)}
-                  className="bg-cyber-bg text-cyber-green-400 border-cyber-green-700"
-                />
-              </div>
-              <div>
-                <Label htmlFor="url" className="text-cyber-green-400">URL</Label>
-                <Input
-                  id="url"
-                  value={formData.url}
-                  onChange={(e) => handleInputChange('url', e.target.value)}
-                  className="bg-cyber-bg text-cyber-green-400 border-cyber-green-700"
-                />
-              </div>
-              {formData.type === 'api' && (
+        <ScrollArea className="flex-grow mt-4">
+          <TabsContent value="type" className="h-full">
+            <Card className="bg-cyber-black border-cyber-green-700">
+              <CardHeader>
+                <CardTitle className="text-cyber-green-400">Select Data Source Type</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <Select onValueChange={(value) => handleInputChange('type', value)}>
+                  <SelectTrigger className="bg-cyber-bg text-cyber-green-400 border-cyber-green-700">
+                    <SelectValue placeholder="Choose a data source type" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-cyber-black border-cyber-green-700">
+                    <SelectItem value="web" className="text-cyber-green-400">Web Scraping</SelectItem>
+                    <SelectItem value="api" className="text-cyber-green-400">API</SelectItem>
+                    <SelectItem value="rss" className="text-cyber-green-400">RSS Feed</SelectItem>
+                    <SelectItem value="ai" className="text-cyber-green-400">AI Processing</SelectItem>
+                  </SelectContent>
+                </Select>
+              </CardContent>
+            </Card>
+          </TabsContent>
+          <TabsContent value="details" className="h-full">
+            <Card className="bg-cyber-black border-cyber-green-700">
+              <CardHeader>
+                <CardTitle className="text-cyber-green-400">Enter Source Details</CardTitle>
+              </CardHeader>
+              <CardContent className="space-y-4">
                 <div>
-                  <Label htmlFor="method" className="text-cyber-green-400">HTTP Method</Label>
-                  <Select onValueChange={(value) => handleInputChange('method', value)}>
-                    <SelectTrigger id="method" className="bg-cyber-bg text-cyber-green-400 border-cyber-green-700">
-                      <SelectValue placeholder="Select HTTP method" />
-                    </SelectTrigger>
-                    <SelectContent className="bg-cyber-black border-cyber-green-700">
-                      <SelectItem value="GET" className="text-cyber-green-400">GET</SelectItem>
-                      <SelectItem value="POST" className="text-cyber-green-400">POST</SelectItem>
-                      <SelectItem value="PUT" className="text-cyber-green-400">PUT</SelectItem>
-                      <SelectItem value="DELETE" className="text-cyber-green-400">DELETE</SelectItem>
-                    </SelectContent>
-                  </Select>
+                  <Label htmlFor="name" className="text-cyber-green-400">Source Name</Label>
+                  <Input
+                    id="name"
+                    value={formData.name}
+                    onChange={(e) => handleInputChange('name', e.target.value)}
+                    className="bg-cyber-bg text-cyber-green-400 border-cyber-green-700"
+                  />
                 </div>
-              )}
-            </CardContent>
-          </Card>
-        </TabsContent>
-        <TabsContent value="schedule" className="mt-4">
-          <Card className="bg-cyber-black border-cyber-green-700">
-            <CardHeader>
-              <CardTitle className="text-cyber-green-400">Set Collection Schedule</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <Select onValueChange={(value) => handleInputChange('frequency', value)}>
-                <SelectTrigger className="bg-cyber-bg text-cyber-green-400 border-cyber-green-700">
-                  <SelectValue placeholder="Choose collection frequency" />
-                </SelectTrigger>
-                <SelectContent className="bg-cyber-black border-cyber-green-700">
-                  <SelectItem value="hourly" className="text-cyber-green-400">Hourly</SelectItem>
-                  <SelectItem value="daily" className="text-cyber-green-400">Daily</SelectItem>
-                  <SelectItem value="weekly" className="text-cyber-green-400">Weekly</SelectItem>
-                  <SelectItem value="monthly" className="text-cyber-green-400">Monthly</SelectItem>
-                </SelectContent>
-              </Select>
-            </CardContent>
-          </Card>
-        </TabsContent>
-        <TabsContent value="review" className="mt-4">
-          <Card className="bg-cyber-black border-cyber-green-700">
-            <CardHeader>
-              <CardTitle className="text-cyber-green-400">Review Configuration</CardTitle>
-            </CardHeader>
-            <CardContent>
-              <div className="space-y-2">
-                <p><span className="font-bold">Name:</span> {formData.name}</p>
-                <p><span className="font-bold">Type:</span> {formData.type}</p>
-                <p><span className="font-bold">URL:</span> {formData.url}</p>
-                {formData.type === 'api' && <p><span className="font-bold">Method:</span> {formData.method}</p>}
-                <p><span className="font-bold">Frequency:</span> {formData.frequency}</p>
-              </div>
-            </CardContent>
-          </Card>
-        </TabsContent>
+                <div>
+                  <Label htmlFor="url" className="text-cyber-green-400">URL</Label>
+                  <Input
+                    id="url"
+                    value={formData.url}
+                    onChange={(e) => handleInputChange('url', e.target.value)}
+                    className="bg-cyber-bg text-cyber-green-400 border-cyber-green-700"
+                  />
+                </div>
+                {formData.type === 'api' && (
+                  <div>
+                    <Label htmlFor="method" className="text-cyber-green-400">HTTP Method</Label>
+                    <Select onValueChange={(value) => handleInputChange('method', value)}>
+                      <SelectTrigger id="method" className="bg-cyber-bg text-cyber-green-400 border-cyber-green-700">
+                        <SelectValue placeholder="Select HTTP method" />
+                      </SelectTrigger>
+                      <SelectContent className="bg-cyber-black border-cyber-green-700">
+                        <SelectItem value="GET" className="text-cyber-green-400">GET</SelectItem>
+                        <SelectItem value="POST" className="text-cyber-green-400">POST</SelectItem>
+                        <SelectItem value="PUT" className="text-cyber-green-400">PUT</SelectItem>
+                        <SelectItem value="DELETE" className="text-cyber-green-400">DELETE</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+                )}
+              </CardContent>
+            </Card>
+          </TabsContent>
+          <TabsContent value="schedule" className="h-full">
+            <Card className="bg-cyber-black border-cyber-green-700">
+              <CardHeader>
+                <CardTitle className="text-cyber-green-400">Set Collection Schedule</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <Select onValueChange={(value) => handleInputChange('frequency', value)}>
+                  <SelectTrigger className="bg-cyber-bg text-cyber-green-400 border-cyber-green-700">
+                    <SelectValue placeholder="Choose collection frequency" />
+                  </SelectTrigger>
+                  <SelectContent className="bg-cyber-black border-cyber-green-700">
+                    <SelectItem value="hourly" className="text-cyber-green-400">Hourly</SelectItem>
+                    <SelectItem value="daily" className="text-cyber-green-400">Daily</SelectItem>
+                    <SelectItem value="weekly" className="text-cyber-green-400">Weekly</SelectItem>
+                    <SelectItem value="monthly" className="text-cyber-green-400">Monthly</SelectItem>
+                  </SelectContent>
+                </Select>
+              </CardContent>
+            </Card>
+          </TabsContent>
+          <TabsContent value="review" className="h-full">
+            <Card className="bg-cyber-black border-cyber-green-700">
+              <CardHeader>
+                <CardTitle className="text-cyber-green-400">Review Configuration</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <div className="space-y-2">
+                  <p><span className="font-bold">Name:</span> {formData.name}</p>
+                  <p><span className="font-bold">Type:</span> {formData.type}</p>
+                  <p><span className="font-bold">URL:</span> {formData.url}</p>
+                  {formData.type === 'api' && <p><span className="font-bold">Method:</span> {formData.method}</p>}
+                  <p><span className="font-bold">Frequency:</span> {formData.frequency}</p>
+                </div>
+              </CardContent>
+            </Card>
+          </TabsContent>
+        </ScrollArea>
       </Tabs>
       <div className="mt-4 flex justify-between">
         <Button onClick={handleBack} disabled={currentStep === 0} className="bg-cyber-green-700 text-cyber-black hover:bg-cyber-green-600">

@@ -4,19 +4,18 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Database, Globe, Clock, Cpu, FileJson, Rss, Plus, Check } from 'lucide-react';
+import { Database, Globe, Clock, Cpu, FileJson, Rss, Plus } from 'lucide-react';
 import DataSourceList from './DataSourceList';
 import DataSourceForm from './DataSourceForm';
 import DataSourceWizard from './DataSourceWizard';
 
 const DataSources = () => {
-  const [showAddForm, setShowAddForm] = useState(false);
   const [isWizardOpen, setIsWizardOpen] = useState(false);
 
   const handleAddSource = (sourceData) => {
     console.log('New data source:', sourceData);
     // Here you would typically add the new source to your state or send it to an API
-    setShowAddForm(false);
+    setIsWizardOpen(false);
   };
 
   return (
@@ -34,7 +33,7 @@ const DataSources = () => {
             <DialogHeader>
               <DialogTitle className="text-cyber-green-400 text-xl font-mono">Add New Data Source</DialogTitle>
             </DialogHeader>
-            <DataSourceWizard onComplete={() => setIsWizardOpen(false)} />
+            <DataSourceWizard onComplete={handleAddSource} />
           </DialogContent>
         </Dialog>
       </div>
@@ -83,7 +82,7 @@ const DataSources = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-cyber-green-400 mb-4">Configure AI-powered web scraping for unstructured data collection.</p>
-                {showAddForm && <DataSourceForm onSubmit={handleAddSource} sourceType="web" />}
+                <DataSourceForm onSubmit={handleAddSource} sourceType="web" />
               </CardContent>
             </Card>
           </TabsContent>
@@ -94,7 +93,7 @@ const DataSources = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-cyber-green-400 mb-4">Set up connections to RESTful APIs or GraphQL endpoints.</p>
-                {showAddForm && <DataSourceForm onSubmit={handleAddSource} sourceType="api" />}
+                <DataSourceForm onSubmit={handleAddSource} sourceType="api" />
               </CardContent>
             </Card>
           </TabsContent>
@@ -105,7 +104,7 @@ const DataSources = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-cyber-green-400 mb-4">Aggregate and process data from RSS feeds.</p>
-                {showAddForm && <DataSourceForm onSubmit={handleAddSource} sourceType="rss" />}
+                <DataSourceForm onSubmit={handleAddSource} sourceType="rss" />
               </CardContent>
             </Card>
           </TabsContent>
@@ -116,7 +115,7 @@ const DataSources = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-cyber-green-400 mb-4">Configure AI models for data normalization and analysis.</p>
-                {showAddForm && <DataSourceForm onSubmit={handleAddSource} sourceType="ai" />}
+                <DataSourceForm onSubmit={handleAddSource} sourceType="ai" />
               </CardContent>
             </Card>
           </TabsContent>
@@ -127,7 +126,7 @@ const DataSources = () => {
               </CardHeader>
               <CardContent>
                 <p className="text-cyber-green-400 mb-4">Set up schedules for automated data collection and processing.</p>
-                {showAddForm && <DataSourceForm onSubmit={handleAddSource} sourceType="schedule" />}
+                <DataSourceForm onSubmit={handleAddSource} sourceType="schedule" />
               </CardContent>
             </Card>
           </TabsContent>

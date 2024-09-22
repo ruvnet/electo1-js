@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import { Switch } from "@/components/ui/switch";
+import { Textarea } from "@/components/ui/textarea";
 
 const DataSourceForm = ({ onSubmit, sourceType }) => {
   const handleSubmit = (event) => {
@@ -30,6 +31,19 @@ const DataSourceForm = ({ onSubmit, sourceType }) => {
             <Label htmlFor="selector" className="text-cyber-green-400">CSS Selector</Label>
             <Input id="selector" name="selector" className="bg-cyber-bg text-cyber-green-400 border-cyber-green-700" placeholder=".article-content" />
           </div>
+          <div>
+            <Label htmlFor="scrapeFrequency" className="text-cyber-green-400">Scrape Frequency</Label>
+            <Select name="scrapeFrequency" defaultValue="daily">
+              <SelectTrigger className="bg-cyber-bg text-cyber-green-400 border-cyber-green-700">
+                <SelectValue placeholder="Select frequency" />
+              </SelectTrigger>
+              <SelectContent className="bg-cyber-black border-cyber-green-700">
+                <SelectItem value="hourly" className="text-cyber-green-400">Hourly</SelectItem>
+                <SelectItem value="daily" className="text-cyber-green-400">Daily</SelectItem>
+                <SelectItem value="weekly" className="text-cyber-green-400">Weekly</SelectItem>
+              </SelectContent>
+            </Select>
+          </div>
         </>
       )}
 
@@ -52,6 +66,10 @@ const DataSourceForm = ({ onSubmit, sourceType }) => {
                 <SelectItem value="DELETE" className="text-cyber-green-400">DELETE</SelectItem>
               </SelectContent>
             </Select>
+          </div>
+          <div>
+            <Label htmlFor="headers" className="text-cyber-green-400">Headers (JSON)</Label>
+            <Textarea id="headers" name="headers" className="bg-cyber-bg text-cyber-green-400 border-cyber-green-700" placeholder='{"Authorization": "Bearer TOKEN"}' />
           </div>
         </>
       )}
