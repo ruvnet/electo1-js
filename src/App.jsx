@@ -29,10 +29,10 @@ const AppContent = () => {
   }, [location]);
 
   return (
-    <div className="flex flex-col min-h-screen">
+    <div className="flex flex-col min-h-screen bg-cyber-bg">
       <Header toggleSidebar={toggleSidebar} showLogo={showLogo} />
       <div className="flex flex-1">
-        <main className="flex-1 overflow-x-hidden overflow-y-auto bg-gray-100 p-4">
+        <main className="flex-1 overflow-x-hidden overflow-y-auto p-4">
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/ai-interface" element={<AIInterface />} />

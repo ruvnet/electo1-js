@@ -64,6 +64,7 @@ module.exports = {
           800: '#10661c',
           900: '#08330e',
         },
+        'cyber-bg': '#0c1713', // New dark grey/greenish background color
       },
       borderRadius: {
         lg: "var(--radius)",
