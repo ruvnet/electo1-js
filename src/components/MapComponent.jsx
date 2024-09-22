@@ -4,13 +4,12 @@ import { scaleLinear } from 'd3-scale';
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
-import { Slider } from "@/components/ui/slider";
 import { useElectionData } from '../hooks/useElectionData';
 
-const geoUrl = 'https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json';
+const geoUrl = 'https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json';
 
 const MapComponent = () => {
-  const [position, setPosition] = useState({ coordinates: [-97, 38], zoom: 1 });
+  const [position, setPosition] = useState({ coordinates: [-82, 28], zoom: 6 });
   const [filter, setFilter] = useState({
     demographic: 'all',
     socioeconomic: 'all',
@@ -25,13 +24,13 @@ const MapComponent = () => {
     .range(['#0a2f1f', '#18992b', '#28ff47']);
 
   const handleZoomIn = () => {
-    if (position.zoom >= 4) return;
-    setPosition(pos => ({ ...pos, zoom: pos.zoom * 2 }));
+    if (position.zoom >= 10) return;
+    setPosition(pos => ({ ...pos, zoom: pos.zoom * 1.5 }));
   }
 
   const handleZoomOut = () => {
     if (position.zoom <= 1) return;
-    setPosition(pos => ({ ...pos, zoom: pos.zoom / 2 }));
+    setPosition(pos => ({ ...pos, zoom: pos.zoom / 1.5 }));
   }
 
   const handleMoveEnd = (position) => {
@@ -75,7 +74,7 @@ const MapComponent = () => {
           <option value="neutral">Neutral</option>
         </Select>
       </div>
-      <ComposableMap projection="geoAlbersUsa" className="h-full w-full">
+      <ComposableMap projection="geoMercator" className="h-full w-full">
         <ZoomableGroup
           zoom={position.zoom}
           center={position.coordinates}
@@ -84,12 +83,13 @@ const MapComponent = () => {
           <Geographies geography={geoUrl}>
             {({ geographies }) =>
               geographies.map((geo) => {
-                const stateData = electionData.find((d) => d.id === geo.id);
+                const countyData = electionData.find((d) => d.id === geo.id);
+                if (geo.properties.STATE !== '12') return null; // Filter for Florida (FIPS code 12)
                 return (
                   <Geography
                     key={geo.rsmKey}
                     geography={geo}
-                    fill={stateData ? colorScale(stateData.value) : '#0a2f1f'}
+                    fill={countyData ? colorScale(countyData.value) : '#0a2f1f'}
                     stroke="#28ff47"
                     strokeWidth={0.5}
                   />
@@ -101,7 +101,7 @@ const MapComponent = () => {
       </ComposableMap>
       <div className="absolute bottom-2 left-2 right-2 z-10">
         <Input 
-          placeholder="Search location..." 
+          placeholder="Search Florida county..." 
           className="bg-cyber-black text-cyber-green-400 border-cyber-green-700"
         />
       </div>
