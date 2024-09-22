@@ -13,6 +13,7 @@ import Settings from "./components/Settings";
 import Predictions from "./components/Predictions";
 import DataSources from "./components/DataSources";
 import AgentDeployment from "./components/AgentDeployment";
+import LibrarySection from "./components/LibrarySection";
 
 const queryClient = new QueryClient();
 
@@ -43,6 +44,7 @@ const AppContent = () => {
             <Route path="/ai-interface" element={<AIInterface />} />
             <Route path="/control-console" element={<ControlConsole />} />
             <Route path="/agent-deployment" element={<AgentDeployment />} />
+            <Route path="/library" element={<LibrarySection />} />
             <Route path="/settings" element={<Settings />} />
           </Routes>
         </main>

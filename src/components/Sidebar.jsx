@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { X, HomeIcon, BrainCircuitIcon, TerminalIcon, SettingsIcon, BarChartIcon, DatabaseIcon, UserIcon } from 'lucide-react';
+import { X, HomeIcon, BrainCircuitIcon, TerminalIcon, SettingsIcon, BarChartIcon, DatabaseIcon, UserIcon, BookIcon } from 'lucide-react';
 import { Button } from "@/components/ui/button";
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -30,6 +30,7 @@ const Sidebar = ({ isOpen, toggleSidebar, showLogo }) => {
     { path: "/ai-interface", icon: BrainCircuitIcon, label: "AI Interface" },
     { path: "/control-console", icon: TerminalIcon, label: "Control Console" },
     { path: "/agent-deployment", icon: UserIcon, label: "Agent Deployment" },
+    { path: "/library", icon: BookIcon, label: "Library" },
     { path: "/settings", icon: SettingsIcon, label: "Settings" },
   ];
 
