@@ -51,6 +51,19 @@ module.exports = {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
         },
+        // Custom cyberpunk colors
+        'cyber-black': '#0a0a0a',
+        'cyber-green': {
+          100: '#d4ffda',
+          200: '#a9ffb5',
+          300: '#7eff91',
+          400: '#53ff6c',
+          500: '#28ff47',
+          600: '#20cc39',
+          700: '#18992b',
+          800: '#10661c',
+          900: '#08330e',
+        },
       },
       borderRadius: {
         lg: "var(--radius)",
@@ -70,6 +83,9 @@ module.exports = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+      },
+      fontFamily: {
+        'mono': ['Courier New', 'monospace'],
       },
     },
   },

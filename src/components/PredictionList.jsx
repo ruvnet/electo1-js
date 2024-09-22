@@ -7,23 +7,23 @@ const predictions = [
 
 const PredictionList = () => {
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md">
-      <h2 className="text-xl font-semibold mb-4">Recent Predictions</h2>
+    <div className="bg-cyber-black p-4 rounded-sm border border-cyber-green-700">
+      <h2 className="text-sm font-mono font-semibold mb-2 text-cyber-green-400">Recent Predictions</h2>
       <div className="overflow-x-auto">
-        <table className="min-w-full">
+        <table className="w-full text-xs font-mono">
           <thead>
-            <tr className="bg-gray-100">
-              <th className="px-4 py-2 text-left">Candidate</th>
-              <th className="px-4 py-2 text-left">Probability</th>
-              <th className="px-4 py-2 text-left">Timestamp</th>
+            <tr className="bg-cyber-green-900">
+              <th className="px-2 py-1 text-left text-cyber-green-300">Candidate</th>
+              <th className="px-2 py-1 text-left text-cyber-green-300">Probability</th>
+              <th className="px-2 py-1 text-left text-cyber-green-300">Timestamp</th>
             </tr>
           </thead>
           <tbody>
             {predictions.map((prediction) => (
-              <tr key={prediction.id}>
-                <td className="border px-4 py-2">{prediction.candidate}</td>
-                <td className="border px-4 py-2">{prediction.probability.toFixed(2)}</td>
-                <td className="border px-4 py-2">{new Date(prediction.timestamp).toLocaleString()}</td>
+              <tr key={prediction.id} className="border-b border-cyber-green-900">
+                <td className="px-2 py-1 text-cyber-green-400">{prediction.candidate}</td>
+                <td className="px-2 py-1 text-cyber-green-400">{prediction.probability.toFixed(2)}</td>
+                <td className="px-2 py-1 text-cyber-green-400">{new Date(prediction.timestamp).toLocaleString()}</td>
               </tr>
             ))}
           </tbody>
