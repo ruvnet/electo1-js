@@ -15,7 +15,7 @@ const ControlPanel = ({ setIsAIModalOpen }) => {
             <div className="flex">
               <Input 
                 placeholder="Search candidates, districts..." 
-                className="bg-cyber-bg text-cyber-green-400 border-cyber-green-700"
+                className="bg-cyber-bg text-cyber-green-400 border-cyber-green-700 placeholder-cyber-green-700"
               />
               <Button className="ml-2 bg-cyber-green-700 text-cyber-black hover:bg-cyber-green-600">
                 <Search className="h-4 w-4" />
@@ -29,12 +29,11 @@ const ControlPanel = ({ setIsAIModalOpen }) => {
                 <SelectValue placeholder="Select filter" />
               </SelectTrigger>
               <SelectContent className="bg-cyber-black border-cyber-green-700">
-                <SelectItem value="all">All</SelectItem>
-                <SelectItem value="demographics">Demographics</SelectItem>
-                <SelectItem value="income">Income Range</SelectItem>
-                <SelectItem value="education">Education Level</SelectItem>
-                <SelectItem value="political">Political Affiliation</SelectItem>
-                <SelectItem value="voting">Voting History</SelectItem>
+                <SelectItem value="demographics" className="text-cyber-green-400">Demographics</SelectItem>
+                <SelectItem value="income" className="text-cyber-green-400">Income Range</SelectItem>
+                <SelectItem value="education" className="text-cyber-green-400">Education Level</SelectItem>
+                <SelectItem value="political" className="text-cyber-green-400">Political Affiliation</SelectItem>
+                <SelectItem value="voting" className="text-cyber-green-400">Voting History</SelectItem>
               </SelectContent>
             </Select>
           </div>
