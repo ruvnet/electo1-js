@@ -9,7 +9,7 @@ const fetchElectionData = async (filter) => {
     { id: '12031', value: 75, name: 'Duval County' },
     { id: '12095', value: 55, name: 'Orange County' },
     { id: '12057', value: 70, name: 'Hillsborough County' },
-    // Add more mock data for other Florida counties
+    // Add more mock data for other Florida counties as needed
   ];
 
   // Simulate API delay

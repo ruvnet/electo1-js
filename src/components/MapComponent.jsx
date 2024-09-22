@@ -6,7 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Select } from "@/components/ui/select";
 import { useElectionData } from '../hooks/useElectionData';
 
-const geoUrl = 'https://cdn.jsdelivr.net/npm/us-atlas@3/counties-10m.json';
+const geoUrl = 'https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json';
 
 const MapComponent = () => {
   const [position, setPosition] = useState({ coordinates: [-82, 28], zoom: 6 });
@@ -41,8 +41,8 @@ const MapComponent = () => {
     setFilter(prev => ({ ...prev, [e.target.name]: e.target.value }));
   }
 
-  if (isLoading) return <div>Loading map data...</div>;
-  if (error) return <div>Error loading map data</div>;
+  if (isLoading) return <div className="text-cyber-green-400">Loading map data...</div>;
+  if (error) return <div className="text-cyber-green-400">Error loading map data</div>;
 
   return (
     <div className="relative h-[500px] bg-cyber-black border border-cyber-green-700 rounded-lg overflow-hidden">
@@ -74,7 +74,7 @@ const MapComponent = () => {
           <option value="neutral">Neutral</option>
         </Select>
       </div>
-      <ComposableMap projection="geoMercator" className="h-full w-full">
+      <ComposableMap projection="geoAlbersUsa" className="h-full w-full">
         <ZoomableGroup
           zoom={position.zoom}
           center={position.coordinates}
@@ -83,13 +83,12 @@ const MapComponent = () => {
           <Geographies geography={geoUrl}>
             {({ geographies }) =>
               geographies.map((geo) => {
-                const countyData = electionData.find((d) => d.id === geo.id);
-                if (geo.properties.STATE !== '12') return null; // Filter for Florida (FIPS code 12)
+                if (geo.properties.name !== "Florida") return null;
                 return (
                   <Geography
                     key={geo.rsmKey}
                     geography={geo}
-                    fill={countyData ? colorScale(countyData.value) : '#0a2f1f'}
+                    fill="#0a2f1f"
                     stroke="#28ff47"
                     strokeWidth={0.5}
                   />
