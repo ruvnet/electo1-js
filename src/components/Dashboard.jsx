@@ -67,6 +67,31 @@ const Dashboard = () => {
           </CardContent>
         </Card>
         <RecentActivity />
+        <Card className="bg-cyber-black border-cyber-green-700">
+          <CardHeader>
+            <CardTitle className="text-cyber-green-400 text-sm font-mono">Data Source Summary</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <ul className="text-xs font-mono space-y-1">
+              <li>Polling Data: 15 sources</li>
+              <li>Social Media Feeds: 5 platforms</li>
+              <li>News Articles: 25 outlets</li>
+              <li>Historical Election Data: 10 years</li>
+            </ul>
+          </CardContent>
+        </Card>
+        <Card className="bg-cyber-black border-cyber-green-700">
+          <CardHeader>
+            <CardTitle className="text-cyber-green-400 text-sm font-mono">AI Model Performance</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="space-y-2 text-xs font-mono">
+              <p>Accuracy: 92%</p>
+              <p>Last Trained: 2 hours ago</p>
+              <p>Confidence Score: 0.87</p>
+            </div>
+          </CardContent>
+        </Card>
       </div>
     </div>
   );
