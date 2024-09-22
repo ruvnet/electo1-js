@@ -10,6 +10,25 @@ import { Select } from "@/components/ui/select";
 import { Slider } from "@/components/ui/slider";
 
 const Dashboard = () => {
+  const keyMetrics = {
+    voterTurnout: "67%",
+    swingStateConfidence: "82%",
+    socialMediaSentiment: "58% Positive",
+  };
+
+  const dataSourceSummary = {
+    pollingData: 15,
+    socialMediaFeeds: 5,
+    newsArticles: 25,
+    historicalElectionData: "10 years",
+  };
+
+  const aiModelPerformance = {
+    accuracy: "92%",
+    lastTrained: "2 hours ago",
+    confidenceScore: 0.87,
+  };
+
   return (
     <div className="container mx-auto px-4 py-6 bg-cyber-bg text-cyber-green-400">
       <h1 className="text-2xl font-mono font-semibold mb-6">Agentic Election Prediction System Dashboard</h1>
@@ -39,9 +58,9 @@ const Dashboard = () => {
           </CardHeader>
           <CardContent>
             <div className="space-y-2">
-              <p className="text-xs font-mono">Voter Turnout Prediction: 67%</p>
-              <p className="text-xs font-mono">Swing State Confidence: 82%</p>
-              <p className="text-xs font-mono">Social Media Sentiment: 58% Positive</p>
+              <p className="text-xs font-mono">Voter Turnout Prediction: {keyMetrics.voterTurnout}</p>
+              <p className="text-xs font-mono">Swing State Confidence: {keyMetrics.swingStateConfidence}</p>
+              <p className="text-xs font-mono">Social Media Sentiment: {keyMetrics.socialMediaSentiment}</p>
             </div>
           </CardContent>
         </Card>
@@ -73,10 +92,10 @@ const Dashboard = () => {
           </CardHeader>
           <CardContent>
             <ul className="text-xs font-mono space-y-1">
-              <li>Polling Data: 15 sources</li>
-              <li>Social Media Feeds: 5 platforms</li>
-              <li>News Articles: 25 outlets</li>
-              <li>Historical Election Data: 10 years</li>
+              <li>Polling Data: {dataSourceSummary.pollingData} sources</li>
+              <li>Social Media Feeds: {dataSourceSummary.socialMediaFeeds} platforms</li>
+              <li>News Articles: {dataSourceSummary.newsArticles} outlets</li>
+              <li>Historical Election Data: {dataSourceSummary.historicalElectionData}</li>
             </ul>
           </CardContent>
         </Card>
@@ -86,9 +105,9 @@ const Dashboard = () => {
           </CardHeader>
           <CardContent>
             <div className="space-y-2 text-xs font-mono">
-              <p>Accuracy: 92%</p>
-              <p>Last Trained: 2 hours ago</p>
-              <p>Confidence Score: 0.87</p>
+              <p>Accuracy: {aiModelPerformance.accuracy}</p>
+              <p>Last Trained: {aiModelPerformance.lastTrained}</p>
+              <p>Confidence Score: {aiModelPerformance.confidenceScore}</p>
             </div>
           </CardContent>
         </Card>
