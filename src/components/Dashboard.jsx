@@ -9,6 +9,8 @@ import SystemStatus from './SystemStatus';
 import MapComponent from './MapComponent';
 import { Progress } from "@/components/ui/progress";
 import { TrendingUp, TrendingDown, BarChart2, Activity, AlertTriangle, Search, Bot } from 'lucide-react';
+import ControlPanel from './ControlPanel';
+import PredictionCard from './PredictionCard';
 
 const Dashboard = () => {
   const [isAIModalOpen, setIsAIModalOpen] = useState(false);
@@ -19,143 +21,14 @@ const Dashboard = () => {
     longTerm: { candidate: "Candidate B", probability: 0.52, consensus: 0.6, likelihood: 0.55 },
   };
 
-  const renderPredictionCard = (title, data, icon) => (
-    <Card className="bg-cyber-black border-cyber-green-700">
-      <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-        <CardTitle className="text-cyber-green-400 text-sm font-mono">{title} Forecast</CardTitle>
-        {icon}
-      </CardHeader>
-      <CardContent>
-        <div className="space-y-2 text-xs font-mono text-cyber-green-400">
-          <p>Leading: {data.candidate}</p>
-          <div className="flex justify-between items-center">
-            <span>Probability:</span>
-            <span>{(data.probability * 100).toFixed(1)}%</span>
-          </div>
-          <Progress value={data.probability * 100} className="bg-cyber-green-900" />
-          <div className="flex justify-between items-center">
-            <span>Consensus:</span>
-            <span>{(data.consensus * 100).toFixed(1)}%</span>
-          </div>
-          <Progress value={data.consensus * 100} className="bg-cyber-green-900" />
-          <div className="flex justify-between items-center">
-            <span>Likelihood:</span>
-            <span>{(data.likelihood * 100).toFixed(1)}%</span>
-          </div>
-          <Progress value={data.likelihood * 100} className="bg-cyber-green-900" />
-        </div>
-      </CardContent>
-    </Card>
-  );
-
-  const ControlPanel = () => (
-    <Card className="bg-cyber-black border-cyber-green-700 mb-6">
-      <CardContent className="p-4">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <div className="space-y-2">
-            <label className="text-cyber-green-400 text-xs font-mono">Search</label>
-            <div className="flex">
-              <Input 
-                placeholder="Search candidates, districts..." 
-                className="bg-cyber-bg text-cyber-green-400 border-cyber-green-700"
-              />
-              <Button className="ml-2 bg-cyber-green-700 text-cyber-black hover:bg-cyber-green-600">
-                <Search className="h-4 w-4" />
-              </Button>
-            </div>
-          </div>
-          <div className="space-y-2">
-            <label className="text-cyber-green-400 text-xs font-mono">Demographics</label>
-            <Select className="bg-cyber-bg text-cyber-green-400 border-cyber-green-700">
-              <option value="">All</option>
-              <option value="18-29">18-29</option>
-              <option value="30-44">30-44</option>
-              <option value="45-64">45-64</option>
-              <option value="65+">65+</option>
-            </Select>
-          </div>
-          <div className="space-y-2">
-            <label className="text-cyber-green-400 text-xs font-mono">Income Range</label>
-            <Select className="bg-cyber-bg text-cyber-green-400 border-cyber-green-700">
-              <option value="">All</option>
-              <option value="low">Low Income</option>
-              <option value="middle">Middle Income</option>
-              <option value="high">High Income</option>
-            </Select>
-          </div>
-          <div className="space-y-2">
-            <label className="text-cyber-green-400 text-xs font-mono">Education Level</label>
-            <Select className="bg-cyber-bg text-cyber-green-400 border-cyber-green-700">
-              <option value="">All</option>
-              <option value="high-school">High School</option>
-              <option value="bachelors">Bachelor's Degree</option>
-              <option value="masters">Master's Degree</option>
-              <option value="phd">PhD</option>
-            </Select>
-          </div>
-          <div className="space-y-2">
-            <label className="text-cyber-green-400 text-xs font-mono">Political Affiliation</label>
-            <Select className="bg-cyber-bg text-cyber-green-400 border-cyber-green-700">
-              <option value="">All</option>
-              <option value="democrat">Democrat</option>
-              <option value="republican">Republican</option>
-              <option value="independent">Independent</option>
-              <option value="other">Other</option>
-            </Select>
-          </div>
-          <div className="space-y-2">
-            <label className="text-cyber-green-400 text-xs font-mono">Voting History</label>
-            <Select className="bg-cyber-bg text-cyber-green-400 border-cyber-green-700">
-              <option value="">All</option>
-              <option value="first-time">First-time Voter</option>
-              <option value="regular">Regular Voter</option>
-              <option value="intermittent">Intermittent Voter</option>
-            </Select>
-          </div>
-        </div>
-        <div className="mt-4 flex justify-end">
-          <Dialog open={isAIModalOpen} onOpenChange={setIsAIModalOpen}>
-            <DialogTrigger asChild>
-              <Button className="bg-cyber-green-700 text-cyber-black hover:bg-cyber-green-600">
-                <Bot className="h-4 w-4 mr-2" />
-                AI Assistant
-              </Button>
-            </DialogTrigger>
-            <DialogContent className="bg-cyber-black border-cyber-green-700">
-              <DialogHeader>
-                <DialogTitle className="text-cyber-green-400">AI Assistant</DialogTitle>
-              </DialogHeader>
-              <div className="text-cyber-green-400 text-sm font-mono">
-                <p>Welcome to the AI Assistant. How can I help you with election predictions today?</p>
-                <ul className="list-disc list-inside mt-2">
-                  <li>Analyze specific demographic trends</li>
-                  <li>Compare candidate performances</li>
-                  <li>Explore historical election data</li>
-                  <li>Generate custom prediction reports</li>
-                </ul>
-              </div>
-              <Input 
-                placeholder="Ask me anything about the election..." 
-                className="bg-cyber-bg text-cyber-green-400 border-cyber-green-700 mt-4"
-              />
-              <Button className="bg-cyber-green-700 text-cyber-black hover:bg-cyber-green-600 mt-2">
-                Submit Query
-              </Button>
-            </DialogContent>
-          </Dialog>
-        </div>
-      </CardContent>
-    </Card>
-  );
-
   return (
     <div className="container mx-auto px-4 py-6 bg-cyber-bg text-cyber-green-400">
       <h1 className="text-2xl font-mono font-semibold mb-6">Election Prediction Dashboard</h1>
-      <ControlPanel />
+      <ControlPanel setIsAIModalOpen={setIsAIModalOpen} />
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {renderPredictionCard("Short-term", predictionData.shortTerm, <TrendingUp className="h-4 w-4 text-cyber-green-400" />)}
-        {renderPredictionCard("Mid-term", predictionData.midTerm, <BarChart2 className="h-4 w-4 text-cyber-green-400" />)}
-        {renderPredictionCard("Long-term", predictionData.longTerm, <TrendingDown className="h-4 w-4 text-cyber-green-400" />)}
+        <PredictionCard title="Short-term" data={predictionData.shortTerm} icon={<TrendingUp className="h-4 w-4 text-cyber-green-400" />} />
+        <PredictionCard title="Mid-term" data={predictionData.midTerm} icon={<BarChart2 className="h-4 w-4 text-cyber-green-400" />} />
+        <PredictionCard title="Long-term" data={predictionData.longTerm} icon={<TrendingDown className="h-4 w-4 text-cyber-green-400" />} />
       </div>
       <div className="mt-6 grid grid-cols-1 md:grid-cols-2 gap-6">
         <Card className="bg-cyber-black border-cyber-green-700 col-span-full">
@@ -208,6 +81,29 @@ const Dashboard = () => {
           </CardContent>
         </Card>
       </div>
+      <Dialog open={isAIModalOpen} onOpenChange={setIsAIModalOpen}>
+        <DialogContent className="bg-cyber-black border-cyber-green-700">
+          <DialogHeader>
+            <DialogTitle className="text-cyber-green-400">AI Assistant</DialogTitle>
+          </DialogHeader>
+          <div className="text-cyber-green-400 text-sm font-mono">
+            <p>Welcome to the AI Assistant. How can I help you with election predictions today?</p>
+            <ul className="list-disc list-inside mt-2">
+              <li>Analyze specific demographic trends</li>
+              <li>Compare candidate performances</li>
+              <li>Explore historical election data</li>
+              <li>Generate custom prediction reports</li>
+            </ul>
+          </div>
+          <Input 
+            placeholder="Ask me anything about the election..." 
+            className="bg-cyber-bg text-cyber-green-400 border-cyber-green-700 mt-4"
+          />
+          <Button className="bg-cyber-green-700 text-cyber-black hover:bg-cyber-green-600 mt-2">
+            Submit Query
+          </Button>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
