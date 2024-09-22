@@ -41,7 +41,7 @@ const Sidebar = ({ isOpen, toggleSidebar, showLogo }) => {
         <X className="h-6 w-6" />
       </Button>
       <AnimatePresence>
-        {isOpen && !showLogo && (
+        {isOpen && (
           <motion.nav
             className="mt-8"
             initial={{ opacity: 0, x: 50 }}
@@ -66,6 +66,19 @@ const Sidebar = ({ isOpen, toggleSidebar, showLogo }) => {
               </motion.div>
             ))}
           </motion.nav>
+        )}
+      </AnimatePresence>
+      <AnimatePresence>
+        {isOpen && showLogo && (
+          <motion.div
+            className="absolute bottom-6 left-6"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 20 }}
+            transition={{ duration: 0.3 }}
+          >
+            <img src="/placeholder.svg" alt="Logo" className="h-8 w-8" />
+          </motion.div>
         )}
       </AnimatePresence>
     </motion.div>
