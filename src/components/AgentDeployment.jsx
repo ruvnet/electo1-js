@@ -7,16 +7,15 @@ import { Slider } from "@/components/ui/slider";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Label } from "@/components/ui/label";
+import { MapPin, Users, DollarSign, Globe, Vote } from 'lucide-react';
+import LocationTab from './AgentDeployment/LocationTab';
+import DemographicTab from './AgentDeployment/DemographicTab';
+import SocioeconomicTab from './AgentDeployment/SocioeconomicTab';
+import CulturalTab from './AgentDeployment/CulturalTab';
+import PoliticalTab from './AgentDeployment/PoliticalTab';
 
 const AgentDeployment = () => {
-  const [deploymentConfig, setDeploymentConfig] = useState({
-    location: '',
-    demographic: '',
-    socioeconomic: '',
-    cultural: '',
-    political: '',
-    dataPoints: [],
-  });
+  const [deploymentConfig, setDeploymentConfig] = useState({});
 
   const handleInputChange = (field, value) => {
     setDeploymentConfig(prev => ({ ...prev, [field]: value }));
@@ -24,8 +23,15 @@ const AgentDeployment = () => {
 
   const handleDeploy = () => {
     console.log('Deploying agent with config:', deploymentConfig);
-    // Here you would typically send this configuration to your backend
   };
+
+  const tabs = [
+    { id: "location", label: "Location", icon: MapPin },
+    { id: "demographic", label: "Demographic", icon: Users },
+    { id: "socioeconomic", label: "Socioeconomic", icon: DollarSign },
+    { id: "cultural", label: "Cultural", icon: Globe },
+    { id: "political", label: "Political", icon: Vote },
+  ];
 
   return (
     <div className="container mx-auto px-4 py-8 bg-cyber-bg text-cyber-green-400">
@@ -37,160 +43,28 @@ const AgentDeployment = () => {
         <CardContent>
           <Tabs defaultValue="location" className="w-full">
             <TabsList className="grid w-full grid-cols-5 bg-cyber-green-900">
-              <TabsTrigger value="location" className="text-cyber-green-400 data-[state=active]:bg-cyber-green-700">Location</TabsTrigger>
-              <TabsTrigger value="demographic" className="text-cyber-green-400 data-[state=active]:bg-cyber-green-700">Demographic</TabsTrigger>
-              <TabsTrigger value="socioeconomic" className="text-cyber-green-400 data-[state=active]:bg-cyber-green-700">Socioeconomic</TabsTrigger>
-              <TabsTrigger value="cultural" className="text-cyber-green-400 data-[state=active]:bg-cyber-green-700">Cultural</TabsTrigger>
-              <TabsTrigger value="political" className="text-cyber-green-400 data-[state=active]:bg-cyber-green-700">Political</TabsTrigger>
+              {tabs.map(tab => (
+                <TabsTrigger key={tab.id} value={tab.id} className="text-cyber-green-400 data-[state=active]:bg-cyber-green-700">
+                  <tab.icon className="h-4 w-4 md:mr-2" />
+                  <span className="hidden md:inline">{tab.label}</span>
+                </TabsTrigger>
+              ))}
             </TabsList>
             <ScrollArea className="h-[400px] mt-4">
               <TabsContent value="location">
-                <div className="space-y-4">
-                  <div>
-                    <Label htmlFor="country" className="text-cyber-green-400">Country</Label>
-                    <Select onValueChange={(value) => handleInputChange('country', value)}>
-                      <SelectTrigger id="country" className="bg-cyber-bg text-cyber-green-400 border-cyber-green-700">
-                        <SelectValue placeholder="Select country" />
-                      </SelectTrigger>
-                      <SelectContent className="bg-cyber-black border-cyber-green-700">
-                        <SelectItem value="usa" className="text-cyber-green-400">USA</SelectItem>
-                        <SelectItem value="canada" className="text-cyber-green-400">Canada</SelectItem>
-                        <SelectItem value="uk" className="text-cyber-green-400">UK</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div>
-                    <Label htmlFor="state" className="text-cyber-green-400">State/Province</Label>
-                    <Input id="state" className="bg-cyber-bg text-cyber-green-400 border-cyber-green-700" onChange={(e) => handleInputChange('state', e.target.value)} />
-                  </div>
-                  <div>
-                    <Label htmlFor="city" className="text-cyber-green-400">City</Label>
-                    <Input id="city" className="bg-cyber-bg text-cyber-green-400 border-cyber-green-700" onChange={(e) => handleInputChange('city', e.target.value)} />
-                  </div>
-                </div>
+                <LocationTab handleInputChange={handleInputChange} />
               </TabsContent>
               <TabsContent value="demographic">
-                <div className="space-y-4">
-                  <div>
-                    <Label htmlFor="age-range" className="text-cyber-green-400">Age Range</Label>
-                    <Select onValueChange={(value) => handleInputChange('ageRange', value)}>
-                      <SelectTrigger id="age-range" className="bg-cyber-bg text-cyber-green-400 border-cyber-green-700">
-                        <SelectValue placeholder="Select age range" />
-                      </SelectTrigger>
-                      <SelectContent className="bg-cyber-black border-cyber-green-700">
-                        <SelectItem value="18-24" className="text-cyber-green-400">18-24</SelectItem>
-                        <SelectItem value="25-34" className="text-cyber-green-400">25-34</SelectItem>
-                        <SelectItem value="35-44" className="text-cyber-green-400">35-44</SelectItem>
-                        <SelectItem value="45-54" className="text-cyber-green-400">45-54</SelectItem>
-                        <SelectItem value="55+" className="text-cyber-green-400">55+</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div>
-                    <Label htmlFor="gender" className="text-cyber-green-400">Gender</Label>
-                    <Select onValueChange={(value) => handleInputChange('gender', value)}>
-                      <SelectTrigger id="gender" className="bg-cyber-bg text-cyber-green-400 border-cyber-green-700">
-                        <SelectValue placeholder="Select gender" />
-                      </SelectTrigger>
-                      <SelectContent className="bg-cyber-black border-cyber-green-700">
-                        <SelectItem value="male" className="text-cyber-green-400">Male</SelectItem>
-                        <SelectItem value="female" className="text-cyber-green-400">Female</SelectItem>
-                        <SelectItem value="non-binary" className="text-cyber-green-400">Non-binary</SelectItem>
-                        <SelectItem value="other" className="text-cyber-green-400">Other</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
+                <DemographicTab handleInputChange={handleInputChange} />
               </TabsContent>
               <TabsContent value="socioeconomic">
-                <div className="space-y-4">
-                  <div>
-                    <Label htmlFor="income" className="text-cyber-green-400">Income Range</Label>
-                    <Select onValueChange={(value) => handleInputChange('income', value)}>
-                      <SelectTrigger id="income" className="bg-cyber-bg text-cyber-green-400 border-cyber-green-700">
-                        <SelectValue placeholder="Select income range" />
-                      </SelectTrigger>
-                      <SelectContent className="bg-cyber-black border-cyber-green-700">
-                        <SelectItem value="low" className="text-cyber-green-400">Low Income</SelectItem>
-                        <SelectItem value="middle" className="text-cyber-green-400">Middle Income</SelectItem>
-                        <SelectItem value="high" className="text-cyber-green-400">High Income</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div>
-                    <Label htmlFor="education" className="text-cyber-green-400">Education Level</Label>
-                    <Select onValueChange={(value) => handleInputChange('education', value)}>
-                      <SelectTrigger id="education" className="bg-cyber-bg text-cyber-green-400 border-cyber-green-700">
-                        <SelectValue placeholder="Select education level" />
-                      </SelectTrigger>
-                      <SelectContent className="bg-cyber-black border-cyber-green-700">
-                        <SelectItem value="high-school" className="text-cyber-green-400">High School</SelectItem>
-                        <SelectItem value="bachelors" className="text-cyber-green-400">Bachelor's Degree</SelectItem>
-                        <SelectItem value="masters" className="text-cyber-green-400">Master's Degree</SelectItem>
-                        <SelectItem value="phd" className="text-cyber-green-400">PhD</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
+                <SocioeconomicTab handleInputChange={handleInputChange} />
               </TabsContent>
               <TabsContent value="cultural">
-                <div className="space-y-4">
-                  <div>
-                    <Label htmlFor="ethnicity" className="text-cyber-green-400">Ethnicity</Label>
-                    <Input id="ethnicity" className="bg-cyber-bg text-cyber-green-400 border-cyber-green-700" onChange={(e) => handleInputChange('ethnicity', e.target.value)} />
-                  </div>
-                  <div>
-                    <Label htmlFor="religion" className="text-cyber-green-400">Religious Affiliation</Label>
-                    <Input id="religion" className="bg-cyber-bg text-cyber-green-400 border-cyber-green-700" onChange={(e) => handleInputChange('religion', e.target.value)} />
-                  </div>
-                  <div>
-                    <Label htmlFor="lgbtq" className="text-cyber-green-400">LGBTQ+ Identity</Label>
-                    <Select onValueChange={(value) => handleInputChange('lgbtq', value)}>
-                      <SelectTrigger id="lgbtq" className="bg-cyber-bg text-cyber-green-400 border-cyber-green-700">
-                        <SelectValue placeholder="Select LGBTQ+ identity" />
-                      </SelectTrigger>
-                      <SelectContent className="bg-cyber-black border-cyber-green-700">
-                        <SelectItem value="yes" className="text-cyber-green-400">Yes</SelectItem>
-                        <SelectItem value="no" className="text-cyber-green-400">No</SelectItem>
-                        <SelectItem value="prefer-not-to-say" className="text-cyber-green-400">Prefer not to say</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                </div>
+                <CulturalTab handleInputChange={handleInputChange} />
               </TabsContent>
               <TabsContent value="political">
-                <div className="space-y-4">
-                  <div>
-                    <Label htmlFor="political-affiliation" className="text-cyber-green-400">Political Affiliation</Label>
-                    <Select onValueChange={(value) => handleInputChange('politicalAffiliation', value)}>
-                      <SelectTrigger id="political-affiliation" className="bg-cyber-bg text-cyber-green-400 border-cyber-green-700">
-                        <SelectValue placeholder="Select political affiliation" />
-                      </SelectTrigger>
-                      <SelectContent className="bg-cyber-black border-cyber-green-700">
-                        <SelectItem value="democrat" className="text-cyber-green-400">Democrat</SelectItem>
-                        <SelectItem value="republican" className="text-cyber-green-400">Republican</SelectItem>
-                        <SelectItem value="independent" className="text-cyber-green-400">Independent</SelectItem>
-                        <SelectItem value="other" className="text-cyber-green-400">Other</SelectItem>
-                      </SelectContent>
-                    </Select>
-                  </div>
-                  <div>
-                    <Label htmlFor="ideology" className="text-cyber-green-400">Political Ideology</Label>
-                    <Slider
-                      id="ideology"
-                      min={0}
-                      max={100}
-                      step={1}
-                      className="w-full"
-                      onValueChange={(value) => handleInputChange('ideology', value[0])}
-                    />
-                    <div className="flex justify-between text-xs mt-1">
-                      <span>Liberal</span>
-                      <span>Moderate</span>
-                      <span>Conservative</span>
-                    </div>
-                  </div>
-                </div>
+                <PoliticalTab handleInputChange={handleInputChange} />
               </TabsContent>
             </ScrollArea>
           </Tabs>
