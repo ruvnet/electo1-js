@@ -83,6 +83,35 @@ const Dashboard = () => {
               <option value="high">High Income</option>
             </Select>
           </div>
+          <div className="space-y-2">
+            <label className="text-cyber-green-400 text-xs font-mono">Education Level</label>
+            <Select className="bg-cyber-bg text-cyber-green-400 border-cyber-green-700">
+              <option value="">All</option>
+              <option value="high-school">High School</option>
+              <option value="bachelors">Bachelor's Degree</option>
+              <option value="masters">Master's Degree</option>
+              <option value="phd">PhD</option>
+            </Select>
+          </div>
+          <div className="space-y-2">
+            <label className="text-cyber-green-400 text-xs font-mono">Political Affiliation</label>
+            <Select className="bg-cyber-bg text-cyber-green-400 border-cyber-green-700">
+              <option value="">All</option>
+              <option value="democrat">Democrat</option>
+              <option value="republican">Republican</option>
+              <option value="independent">Independent</option>
+              <option value="other">Other</option>
+            </Select>
+          </div>
+          <div className="space-y-2">
+            <label className="text-cyber-green-400 text-xs font-mono">Voting History</label>
+            <Select className="bg-cyber-bg text-cyber-green-400 border-cyber-green-700">
+              <option value="">All</option>
+              <option value="first-time">First-time Voter</option>
+              <option value="regular">Regular Voter</option>
+              <option value="intermittent">Intermittent Voter</option>
+            </Select>
+          </div>
         </div>
         <div className="mt-4 flex justify-end">
           <Dialog open={isAIModalOpen} onOpenChange={setIsAIModalOpen}>
