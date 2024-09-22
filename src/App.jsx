@@ -10,6 +10,8 @@ import Dashboard from "./components/Dashboard";
 import AIInterface from "./components/AIInterface";
 import ControlConsole from "./components/ControlConsole";
 import Settings from "./components/Settings";
+import Predictions from "./components/Predictions";
+import DataSources from "./components/DataSources";
 
 const queryClient = new QueryClient();
 
@@ -35,6 +37,8 @@ const AppContent = () => {
         <main className="flex-1 overflow-x-hidden overflow-y-auto p-4">
           <Routes>
             <Route path="/" element={<Dashboard />} />
+            <Route path="/predictions" element={<Predictions />} />
+            <Route path="/data-sources" element={<DataSources />} />
             <Route path="/ai-interface" element={<AIInterface />} />
             <Route path="/control-console" element={<ControlConsole />} />
             <Route path="/settings" element={<Settings />} />
