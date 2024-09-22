@@ -80,7 +80,7 @@ const LibrarySection = () => {
                   <span className="hidden sm:inline">New Template</span>
                 </Button>
               </DialogTrigger>
-              <DialogContent className="bg-cyber-black border-cyber-green-700 text-cyber-green-400">
+              <DialogContent className="bg-cyber-black border-cyber-green-700 text-cyber-green-400 w-full max-w-3xl">
                 <DialogHeader>
                   <DialogTitle>{selectedItem ? 'Edit' : 'Create'} Template</DialogTitle>
                 </DialogHeader>
@@ -126,7 +126,7 @@ const LibrarySection = () => {
         </CardContent>
       </Card>
       <Dialog open={isViewModalOpen} onOpenChange={setIsViewModalOpen}>
-        <DialogContent className="bg-cyber-black border-cyber-green-700 text-cyber-green-400">
+        <DialogContent className="bg-cyber-black border-cyber-green-700 text-cyber-green-400 w-full max-w-3xl">
           <DialogHeader>
             <DialogTitle>View Template</DialogTitle>
           </DialogHeader>
