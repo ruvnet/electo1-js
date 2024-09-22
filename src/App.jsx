@@ -40,7 +40,7 @@ const AppContent = () => {
             <Route path="/settings" element={<Settings />} />
           </Routes>
         </main>
-        <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+        <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} showLogo={showLogo} />
       </div>
       <Footer />
     </div>
