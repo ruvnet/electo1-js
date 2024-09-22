@@ -1,12 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Select } from "@/components/ui/select";
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import PredictionChart from './PredictionChart';
 import SystemStatus from './SystemStatus';
 import MapComponent from './MapComponent';
 import { Progress } from "@/components/ui/progress";
-import { TrendingUp, TrendingDown, BarChart2, Activity, AlertTriangle } from 'lucide-react';
+import { TrendingUp, TrendingDown, BarChart2, Activity, AlertTriangle, Search, Bot } from 'lucide-react';
 
 const Dashboard = () => {
+  const [isAIModalOpen, setIsAIModalOpen] = useState(false);
+
   const predictionData = {
     shortTerm: { candidate: "Candidate A", probability: 0.65, consensus: 0.8, likelihood: 0.75 },
     midTerm: { candidate: "Candidate A", probability: 0.58, consensus: 0.7, likelihood: 0.68 },
@@ -42,9 +48,81 @@ const Dashboard = () => {
     </Card>
   );
 
+  const ControlPanel = () => (
+    <Card className="bg-cyber-black border-cyber-green-700 mb-6">
+      <CardContent className="p-4">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+          <div className="space-y-2">
+            <label className="text-cyber-green-400 text-xs font-mono">Search</label>
+            <div className="flex">
+              <Input 
+                placeholder="Search candidates, districts..." 
+                className="bg-cyber-bg text-cyber-green-400 border-cyber-green-700"
+              />
+              <Button className="ml-2 bg-cyber-green-700 text-cyber-black hover:bg-cyber-green-600">
+                <Search className="h-4 w-4" />
+              </Button>
+            </div>
+          </div>
+          <div className="space-y-2">
+            <label className="text-cyber-green-400 text-xs font-mono">Demographics</label>
+            <Select className="bg-cyber-bg text-cyber-green-400 border-cyber-green-700">
+              <option value="">All</option>
+              <option value="18-29">18-29</option>
+              <option value="30-44">30-44</option>
+              <option value="45-64">45-64</option>
+              <option value="65+">65+</option>
+            </Select>
+          </div>
+          <div className="space-y-2">
+            <label className="text-cyber-green-400 text-xs font-mono">Income Range</label>
+            <Select className="bg-cyber-bg text-cyber-green-400 border-cyber-green-700">
+              <option value="">All</option>
+              <option value="low">Low Income</option>
+              <option value="middle">Middle Income</option>
+              <option value="high">High Income</option>
+            </Select>
+          </div>
+        </div>
+        <div className="mt-4 flex justify-end">
+          <Dialog open={isAIModalOpen} onOpenChange={setIsAIModalOpen}>
+            <DialogTrigger asChild>
+              <Button className="bg-cyber-green-700 text-cyber-black hover:bg-cyber-green-600">
+                <Bot className="h-4 w-4 mr-2" />
+                AI Assistant
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="bg-cyber-black border-cyber-green-700">
+              <DialogHeader>
+                <DialogTitle className="text-cyber-green-400">AI Assistant</DialogTitle>
+              </DialogHeader>
+              <div className="text-cyber-green-400 text-sm font-mono">
+                <p>Welcome to the AI Assistant. How can I help you with election predictions today?</p>
+                <ul className="list-disc list-inside mt-2">
+                  <li>Analyze specific demographic trends</li>
+                  <li>Compare candidate performances</li>
+                  <li>Explore historical election data</li>
+                  <li>Generate custom prediction reports</li>
+                </ul>
+              </div>
+              <Input 
+                placeholder="Ask me anything about the election..." 
+                className="bg-cyber-bg text-cyber-green-400 border-cyber-green-700 mt-4"
+              />
+              <Button className="bg-cyber-green-700 text-cyber-black hover:bg-cyber-green-600 mt-2">
+                Submit Query
+              </Button>
+            </DialogContent>
+          </Dialog>
+        </div>
+      </CardContent>
+    </Card>
+  );
+
   return (
     <div className="container mx-auto px-4 py-6 bg-cyber-bg text-cyber-green-400">
       <h1 className="text-2xl font-mono font-semibold mb-6">Election Prediction Dashboard</h1>
+      <ControlPanel />
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {renderPredictionCard("Short-term", predictionData.shortTerm, <TrendingUp className="h-4 w-4 text-cyber-green-400" />)}
         {renderPredictionCard("Mid-term", predictionData.midTerm, <BarChart2 className="h-4 w-4 text-cyber-green-400" />)}
