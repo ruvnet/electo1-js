@@ -1,7 +1,5 @@
 import React, { useState } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Button } from "@/components/ui/button";
 import PredictionChart from './PredictionChart';
 import PredictionList from './PredictionList';
@@ -25,7 +23,7 @@ const Predictions = () => {
       <h1 className="text-xl font-mono font-semibold mb-4">Election Predictions</h1>
       <PredictionControlPanel onParamChange={handleParamChange} />
       <div className="mt-4">
-        <Button onClick={handleGeneratePrediction} className="bg-cyber-green-700 text-cyber-black hover:bg-cyber-green-600">
+        <Button onClick={handleGeneratePrediction} className="w-full sm:w-auto bg-cyber-green-700 text-cyber-black hover:bg-cyber-green-600">
           Generate Prediction
         </Button>
       </div>
