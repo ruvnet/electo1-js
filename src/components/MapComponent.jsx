@@ -83,12 +83,14 @@ const MapComponent = () => {
           <Geographies geography={geoUrl}>
             {({ geographies }) =>
               geographies.map((geo) => {
-                if (geo.properties.name !== "Florida") return null;
+                const isFloridaCounty = geo.properties.name === "Florida" || (geo.properties.state === "FL" && geo.properties.lsad === "County");
+                if (!isFloridaCounty) return null;
+                const countyData = electionData.find(d => d.id === geo.id);
                 return (
                   <Geography
                     key={geo.rsmKey}
                     geography={geo}
-                    fill="#0a2f1f"
+                    fill={countyData ? colorScale(countyData.value) : "#0a2f1f"}
                     stroke="#28ff47"
                     strokeWidth={0.5}
                   />
