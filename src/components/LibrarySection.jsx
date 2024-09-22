@@ -6,12 +6,17 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Save, Edit, Trash2, Share2, Eye, Filter } from 'lucide-react';
+import { Save, Edit, Trash2, Share2, Eye, Filter, Plus } from 'lucide-react';
 import { libraryItems } from '../data/libraryItems';
+import TemplateForm from './LibrarySection/TemplateForm';
+import TemplateView from './LibrarySection/TemplateView';
 
 const LibrarySection = () => {
   const [items, setItems] = useState(libraryItems);
   const [filter, setFilter] = useState('');
+  const [selectedItem, setSelectedItem] = useState(null);
+  const [isViewModalOpen, setIsViewModalOpen] = useState(false);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
   const handleFilter = (event) => {
     setFilter(event.target.value.toLowerCase());
@@ -32,13 +37,22 @@ const LibrarySection = () => {
   };
 
   const handleView = (item) => {
-    console.log(`Viewing item:`, item);
-    // Implement view functionality
+    setSelectedItem(item);
+    setIsViewModalOpen(true);
   };
 
   const handleEdit = (item) => {
-    console.log(`Editing item:`, item);
-    // Implement edit functionality
+    setSelectedItem(item);
+    setIsEditModalOpen(true);
+  };
+
+  const handleSave = (newItem) => {
+    if (newItem.id) {
+      setItems(items.map(item => item.id === newItem.id ? newItem : item));
+    } else {
+      setItems([...items, { ...newItem, id: Date.now() }]);
+    }
+    setIsEditModalOpen(false);
   };
 
   return (
@@ -55,10 +69,24 @@ const LibrarySection = () => {
               onChange={handleFilter}
               className="bg-cyber-bg text-cyber-green-400 border-cyber-green-700 mr-2"
             />
-            <Button className="bg-cyber-green-700 text-cyber-black hover:bg-cyber-green-600">
+            <Button className="bg-cyber-green-700 text-cyber-black hover:bg-cyber-green-600 mr-2">
               <Filter className="h-4 w-4 mr-2" />
               <span className="hidden sm:inline">Filter</span>
             </Button>
+            <Dialog open={isEditModalOpen} onOpenChange={setIsEditModalOpen}>
+              <DialogTrigger asChild>
+                <Button className="bg-cyber-green-700 text-cyber-black hover:bg-cyber-green-600">
+                  <Plus className="h-4 w-4 mr-2" />
+                  <span className="hidden sm:inline">New Template</span>
+                </Button>
+              </DialogTrigger>
+              <DialogContent className="bg-cyber-black border-cyber-green-700 text-cyber-green-400">
+                <DialogHeader>
+                  <DialogTitle>{selectedItem ? 'Edit' : 'Create'} Template</DialogTitle>
+                </DialogHeader>
+                <TemplateForm item={selectedItem} onSave={handleSave} />
+              </DialogContent>
+            </Dialog>
           </div>
           <ScrollArea className="h-[400px]">
             <Table>
@@ -97,6 +125,14 @@ const LibrarySection = () => {
           </ScrollArea>
         </CardContent>
       </Card>
+      <Dialog open={isViewModalOpen} onOpenChange={setIsViewModalOpen}>
+        <DialogContent className="bg-cyber-black border-cyber-green-700 text-cyber-green-400">
+          <DialogHeader>
+            <DialogTitle>View Template</DialogTitle>
+          </DialogHeader>
+          {selectedItem && <TemplateView item={selectedItem} />}
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
