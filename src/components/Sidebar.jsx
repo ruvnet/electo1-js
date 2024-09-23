@@ -37,7 +37,7 @@ const Sidebar = ({ isOpen, toggleSidebar, showLogo }) => {
 
   return (
     <motion.div
-      className="fixed inset-y-0 right-0 w-64 md:w-80 bg-cyber-black text-cyber-green-400 p-4 z-50 border-l border-cyber-green-700"
+      className="fixed inset-y-0 right-0 w-48 bg-cyber-black text-cyber-green-400 p-4 z-50 border-l border-cyber-green-700"
       initial={{ x: '100%' }}
       animate={{ x: isOpen ? 0 : '100%' }}
       transition={{ duration: 0.3, ease: 'easeInOut' }}
@@ -63,10 +63,10 @@ const Sidebar = ({ isOpen, toggleSidebar, showLogo }) => {
               >
                 <Link
                   to={item.path}
-                  className="block py-2 px-3 rounded text-sm md:text-base font-mono transition duration-200 hover:bg-cyber-green-900 hover:text-cyber-green-200"
+                  className="block py-2 px-3 rounded text-xs font-mono transition duration-200 hover:bg-cyber-green-900 hover:text-cyber-green-200"
                   onClick={() => handleNavigation(item.path)}
                 >
-                  <item.icon className="inline-block mr-2 h-4 w-4 md:h-5 md:w-5" /> {item.label}
+                  <item.icon className="inline-block mr-2 h-3 w-3" /> {item.label}
                 </Link>
               </motion.div>
             ))}
@@ -82,7 +82,7 @@ const Sidebar = ({ isOpen, toggleSidebar, showLogo }) => {
             exit={{ opacity: 0, y: 20 }}
             transition={{ duration: 0.3 }}
           >
-            <img src="/placeholder.svg" alt="Logo" className="h-6 w-6 md:h-8 md:w-8 filter invert" />
+            <img src="/placeholder.svg" alt="Logo" className="h-6 w-6 filter invert" />
           </motion.div>
         )}
       </AnimatePresence>
