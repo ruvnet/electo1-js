@@ -1,4 +1,8 @@
 # Agentic Election Prediction System
+What if you could predict every election on individual level for the entire world, in real time.
+
+[![Agentic Election Prediction System](./assets/image.png)](https://electo1-js.gptengineer.run/)
+
 
 ## Introduction
 
