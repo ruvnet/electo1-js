@@ -2,61 +2,95 @@ from sqlalchemy.orm import Session
 from api import models, schemas
 from datetime import datetime
 
-def create_prediction(db: Session, prediction: schemas.PredictionCreate):
-    db_prediction = models.Prediction(**prediction.dict())
-    db.add(db_prediction)
+# Existing CRUD operations for Prediction and DataSource...
+
+def create_agent_deployment(db: Session, agent_deployment: schemas.AgentDeploymentCreate):
+    db_agent_deployment = models.AgentDeployment(**agent_deployment.dict())
+    db.add(db_agent_deployment)
     db.commit()
-    db.refresh(db_prediction)
-    return db_prediction
+    db.refresh(db_agent_deployment)
+    return db_agent_deployment
 
-def get_prediction(db: Session, prediction_id: int):
-    return db.query(models.Prediction).filter(models.Prediction.id == prediction_id).first()
+def get_agent_deployment(db: Session, agent_deployment_id: int):
+    return db.query(models.AgentDeployment).filter(models.AgentDeployment.id == agent_deployment_id).first()
 
-def get_predictions(db: Session, skip: int = 0, limit: int = 100):
-    return db.query(models.Prediction).offset(skip).limit(limit).all()
+def get_agent_deployments(db: Session, skip: int = 0, limit: int = 100):
+    return db.query(models.AgentDeployment).offset(skip).limit(limit).all()
 
-def update_prediction(db: Session, prediction_id: int, prediction: schemas.PredictionCreate):
-    db_prediction = db.query(models.Prediction).filter(models.Prediction.id == prediction_id).first()
-    if db_prediction:
-        for key, value in prediction.dict().items():
-            setattr(db_prediction, key, value)
+def update_agent_deployment(db: Session, agent_deployment_id: int, agent_deployment: schemas.AgentDeploymentUpdate):
+    db_agent_deployment = db.query(models.AgentDeployment).filter(models.AgentDeployment.id == agent_deployment_id).first()
+    if db_agent_deployment:
+        update_data = agent_deployment.dict(exclude_unset=True)
+        for key, value in update_data.items():
+            setattr(db_agent_deployment, key, value)
+        db_agent_deployment.updated_at = datetime.utcnow()
         db.commit()
-        db.refresh(db_prediction)
-    return db_prediction
+        db.refresh(db_agent_deployment)
+    return db_agent_deployment
 
-def delete_prediction(db: Session, prediction_id: int):
-    db_prediction = db.query(models.Prediction).filter(models.Prediction.id == prediction_id).first()
-    if db_prediction:
-        db.delete(db_prediction)
+def delete_agent_deployment(db: Session, agent_deployment_id: int):
+    db_agent_deployment = db.query(models.AgentDeployment).filter(models.AgentDeployment.id == agent_deployment_id).first()
+    if db_agent_deployment:
+        db.delete(db_agent_deployment)
         db.commit()
-    return db_prediction
+    return db_agent_deployment
 
-def create_data_source(db: Session, data_source: schemas.DataSourceCreate):
-    db_data_source = models.DataSource(**data_source.dict())
-    db.add(db_data_source)
+def create_library_item(db: Session, library_item: schemas.LibraryItemCreate):
+    db_library_item = models.LibraryItem(**library_item.dict())
+    db.add(db_library_item)
     db.commit()
-    db.refresh(db_data_source)
-    return db_data_source
+    db.refresh(db_library_item)
+    return db_library_item
 
-def get_data_source(db: Session, data_source_id: int):
-    return db.query(models.DataSource).filter(models.DataSource.id == data_source_id).first()
+def get_library_item(db: Session, library_item_id: int):
+    return db.query(models.LibraryItem).filter(models.LibraryItem.id == library_item_id).first()
 
-def get_data_sources(db: Session, skip: int = 0, limit: int = 100):
-    return db.query(models.DataSource).offset(skip).limit(limit).all()
+def get_library_items(db: Session, skip: int = 0, limit: int = 100):
+    return db.query(models.LibraryItem).offset(skip).limit(limit).all()
 
-def update_data_source(db: Session, data_source_id: int, data_source: schemas.DataSourceUpdate):
-    db_data_source = db.query(models.DataSource).filter(models.DataSource.id == data_source_id).first()
-    if db_data_source:
-        for key, value in data_source.dict(exclude_unset=True).items():
-            setattr(db_data_source, key, value)
-        db_data_source.last_updated = datetime.utcnow()
+def update_library_item(db: Session, library_item_id: int, library_item: schemas.LibraryItemUpdate):
+    db_library_item = db.query(models.LibraryItem).filter(models.LibraryItem.id == library_item_id).first()
+    if db_library_item:
+        update_data = library_item.dict(exclude_unset=True)
+        for key, value in update_data.items():
+            setattr(db_library_item, key, value)
+        db_library_item.updated_at = datetime.utcnow()
         db.commit()
-        db.refresh(db_data_source)
-    return db_data_source
+        db.refresh(db_library_item)
+    return db_library_item
 
-def delete_data_source(db: Session, data_source_id: int):
-    db_data_source = db.query(models.DataSource).filter(models.DataSource.id == data_source_id).first()
-    if db_data_source:
-        db.delete(db_data_source)
+def delete_library_item(db: Session, library_item_id: int):
+    db_library_item = db.query(models.LibraryItem).filter(models.LibraryItem.id == library_item_id).first()
+    if db_library_item:
+        db.delete(db_library_item)
         db.commit()
-    return db_data_source
+    return db_library_item
+
+def create_setting(db: Session, setting: schemas.SettingCreate):
+    db_setting = models.Setting(**setting.dict())
+    db.add(db_setting)
+    db.commit()
+    db.refresh(db_setting)
+    return db_setting
+
+def get_setting(db: Session, key: str):
+    return db.query(models.Setting).filter(models.Setting.key == key).first()
+
+def get_settings(db: Session, skip: int = 0, limit: int = 100):
+    return db.query(models.Setting).offset(skip).limit(limit).all()
+
+def update_setting(db: Session, key: str, setting: schemas.SettingUpdate):
+    db_setting = db.query(models.Setting).filter(models.Setting.key == key).first()
+    if db_setting:
+        db_setting.value = setting.value
+        db_setting.updated_at = datetime.utcnow()
+        db.commit()
+        db.refresh(db_setting)
+    return db_setting
+
+def delete_setting(db: Session, key: str):
+    db_setting = db.query(models.Setting).filter(models.Setting.key == key).first()
+    if db_setting:
+        db.delete(db_setting)
+        db.commit()
+    return db_setting

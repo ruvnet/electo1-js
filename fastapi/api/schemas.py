@@ -1,6 +1,6 @@
 from pydantic import BaseModel
 from datetime import datetime
-from typing import Optional
+from typing import Optional, Dict, Any
 
 class PredictionBase(BaseModel):
     candidate: str
@@ -34,6 +34,73 @@ class DataSourceUpdate(BaseModel):
 class DataSource(DataSourceBase):
     id: int
     last_updated: datetime
+
+    class Config:
+        orm_mode = True
+
+class AgentDeploymentBase(BaseModel):
+    name: str
+    location: Dict[str, Any]
+    demographic: Dict[str, Any]
+    socioeconomic: Dict[str, Any]
+    cultural: Dict[str, Any]
+    political: Dict[str, Any]
+
+class AgentDeploymentCreate(AgentDeploymentBase):
+    pass
+
+class AgentDeploymentUpdate(BaseModel):
+    name: Optional[str] = None
+    location: Optional[Dict[str, Any]] = None
+    demographic: Optional[Dict[str, Any]] = None
+    socioeconomic: Optional[Dict[str, Any]] = None
+    cultural: Optional[Dict[str, Any]] = None
+    political: Optional[Dict[str, Any]] = None
+
+class AgentDeployment(AgentDeploymentBase):
+    id: int
+    created_at: datetime
+    updated_at: datetime
+
+    class Config:
+        orm_mode = True
+
+class LibraryItemBase(BaseModel):
+    name: str
+    type: str
+    description: str
+    data: Dict[str, Any]
+
+class LibraryItemCreate(LibraryItemBase):
+    pass
+
+class LibraryItemUpdate(BaseModel):
+    name: Optional[str] = None
+    type: Optional[str] = None
+    description: Optional[str] = None
+    data: Optional[Dict[str, Any]] = None
+
+class LibraryItem(LibraryItemBase):
+    id: int
+    created_at: datetime
+    updated_at: datetime
+
+    class Config:
+        orm_mode = True
+
+class SettingBase(BaseModel):
+    key: str
+    value: Any
+
+class SettingCreate(SettingBase):
+    pass
+
+class SettingUpdate(BaseModel):
+    value: Any
+
+class Setting(SettingBase):
+    id: int
+    updated_at: datetime
 
     class Config:
         orm_mode = True

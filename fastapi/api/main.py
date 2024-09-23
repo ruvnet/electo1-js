@@ -1,7 +1,6 @@
 from fastapi import FastAPI
-from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
-from api.routers import predictions, data_sources
+from api.routers import predictions, data_sources, agent_deployment, library, settings
 from api.database import engine, Base
 
 app = FastAPI()
@@ -19,11 +18,11 @@ app.add_middleware(
 )
 
 # Include routers
-app.include_router(predictions.router)
-app.include_router(data_sources.router)
-
-# Mount static files
-app.mount("/static", StaticFiles(directory="static"), name="static")
+app.include_router(predictions.router, prefix="/api/predictions", tags=["predictions"])
+app.include_router(data_sources.router, prefix="/api/data_sources", tags=["data_sources"])
+app.include_router(agent_deployment.router, prefix="/api/agent_deployment", tags=["agent_deployment"])
+app.include_router(library.router, prefix="/api/library", tags=["library"])
+app.include_router(settings.router, prefix="/api/settings", tags=["settings"])
 
 @app.get("/")
 async def root():

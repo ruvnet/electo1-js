@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, Float, String, DateTime, Enum
+from sqlalchemy import Column, Integer, Float, String, DateTime, Enum, JSON
 from api.database import Base
 from datetime import datetime
 
@@ -19,3 +19,35 @@ class DataSource(Base):
     url = Column(String)
     status = Column(Enum("Active", "Inactive", name="source_status"))
     last_updated = Column(DateTime, default=datetime.utcnow)
+
+class AgentDeployment(Base):
+    __tablename__ = "agent_deployments"
+
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String, index=True)
+    location = Column(JSON)
+    demographic = Column(JSON)
+    socioeconomic = Column(JSON)
+    cultural = Column(JSON)
+    political = Column(JSON)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+class LibraryItem(Base):
+    __tablename__ = "library_items"
+
+    id = Column(Integer, primary_key=True, index=True)
+    name = Column(String, index=True)
+    type = Column(String, index=True)
+    description = Column(String)
+    data = Column(JSON)
+    created_at = Column(DateTime, default=datetime.utcnow)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
+
+class Setting(Base):
+    __tablename__ = "settings"
+
+    id = Column(Integer, primary_key=True, index=True)
+    key = Column(String, unique=True, index=True)
+    value = Column(JSON)
+    updated_at = Column(DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
