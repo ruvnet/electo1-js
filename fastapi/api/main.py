@@ -1,9 +1,10 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import RedirectResponse
 from api.routers import predictions, data_sources, agent_deployment, library, settings
 from api.database import engine, Base
 
-app = FastAPI()
+app = FastAPI(title="Electro-1")
 
 # Create database tables
 Base.metadata.create_all(bind=engine)
@@ -24,6 +25,6 @@ app.include_router(agent_deployment.router, prefix="/api/agent_deployment", tags
 app.include_router(library.router, prefix="/api/library", tags=["library"])
 app.include_router(settings.router, prefix="/api/settings", tags=["settings"])
 
-@app.get("/")
+@app.get("/", include_in_schema=False)
 async def root():
-    return {"message": "Welcome to the Election Prediction System API"}
+    return RedirectResponse(url="/docs")

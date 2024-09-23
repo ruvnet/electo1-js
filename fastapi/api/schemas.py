@@ -14,7 +14,7 @@ class Prediction(PredictionBase):
     timestamp: datetime
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class DataSourceBase(BaseModel):
     name: str
@@ -36,7 +36,7 @@ class DataSource(DataSourceBase):
     last_updated: datetime
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class AgentDeploymentBase(BaseModel):
     name: str
@@ -63,7 +63,7 @@ class AgentDeployment(AgentDeploymentBase):
     updated_at: datetime
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class LibraryItemBase(BaseModel):
     name: str
@@ -86,7 +86,7 @@ class LibraryItem(LibraryItemBase):
     updated_at: datetime
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class SettingBase(BaseModel):
     key: str
@@ -103,4 +103,4 @@ class Setting(SettingBase):
     updated_at: datetime
 
     class Config:
-        orm_mode = True
+        from_attributes = True
