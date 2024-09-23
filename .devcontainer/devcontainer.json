@@ -1,0 +1,19 @@
+{
+  "name": "Python 3 with Poetry",
+  "image": "mcr.microsoft.com/devcontainers/python:3.11",
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "lts"
+    }
+  },
+  "postCreateCommand": "curl -sSL https://install.python-poetry.org | python3 - && echo 'export PATH=\"$HOME/.local/bin:$PATH\"' >> ~/.bashrc",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "ms-python.vscode-pylance"
+      ]
+    }
+  },
+  "remoteUser": "vscode"
+}
