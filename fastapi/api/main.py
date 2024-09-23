@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
-from api.routers import predictions
+from api.routers import predictions, data_sources
 from api.database import engine, Base
 
 app = FastAPI()
@@ -20,6 +20,7 @@ app.add_middleware(
 
 # Include routers
 app.include_router(predictions.router)
+app.include_router(data_sources.router)
 
 # Mount static files
 app.mount("/static", StaticFiles(directory="static"), name="static")
