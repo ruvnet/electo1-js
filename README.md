@@ -29,7 +29,7 @@ The Agentic Election Prediction System is an innovative platform designed to acc
 - Settings: System-wide configuration
 - Tactics: Manage civic engagement tactics
 
-For detailed API documentation, please refer to the `documentation/api_reference.md` file.
+For detailed API documentation, please refer to the [API Reference](documentation/api_reference.md) file.
 
 ## Installation and Setup
 
@@ -184,3 +184,12 @@ fastapi/
   - `GET /api/tactics/{id}`: Get a specific tactic
   - `PUT /api/tactics/{id}`: Update a tactic
   - `DELETE /api/tactics/{id}`: Delete a tactic
+
+## Documentation
+
+For more detailed information, please refer to the following documentation files:
+
+- [API Reference](documentation/api_reference.md)
+- [User Guide](documentation/user_guide.md)
+- [Developer Guide](documentation/dev_guide.md)
+- [Frontend Overview](documentation/frontend_overview.md)
