@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Election Prediction System</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Election Prediction System</h1>
+        <form id="prediction-form">
+            <input type="text" name="region" placeholder="Region" required>
+            <input type="number" name="population" placeholder="Population" required>
+            <input type="number" name="gdp" placeholder="GDP" required>
+            <input type="number" name="unemployment" placeholder="Unemployment Rate" required>
+            <button type="submit">Predict</button>
+        </form>
+        <div id="result"></div>
+    </div>
+    <script src="/static/js/script.js"></script>
+</body>
+</html>
