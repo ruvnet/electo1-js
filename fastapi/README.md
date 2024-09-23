@@ -177,6 +177,11 @@ GET /status/
    git clone https://github.com/ruvnet/Electo1.git
    cd Electo1
    ```
+Install Poetry
+   ```
+   curl -sSL https://install.python-poetry.org | python3 -
+
+   ```
 
 2. **Install dependencies**:
    ```sh
