@@ -1,4 +1,5 @@
 # Agentic Election Prediction System
+What if you could predict every election on individual level for the entire world, in real time.
 
 ## Introduction
 The Agentic Election Prediction System accurately forecasts election outcomes using an agentic approach—where independent agents collaborate to analyze complex datasets.
