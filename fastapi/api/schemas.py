@@ -104,3 +104,26 @@ class Setting(SettingBase):
 
     class Config:
         from_attributes = True
+
+class TacticBase(BaseModel):
+    name: str
+    description: str
+    target_demographic: str
+    implementation_method: str
+
+class TacticCreate(TacticBase):
+    pass
+
+class TacticUpdate(BaseModel):
+    name: Optional[str] = None
+    description: Optional[str] = None
+    target_demographic: Optional[str] = None
+    implementation_method: Optional[str] = None
+
+class Tactic(TacticBase):
+    id: int
+    created_at: datetime
+    updated_at: datetime
+
+    class Config:
+        from_attributes = True

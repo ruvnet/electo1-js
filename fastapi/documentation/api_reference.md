@@ -2,140 +2,62 @@
 
 ## Overview
 
-This document provides detailed information about the API endpoints available in the Agentic Election Prediction System. Each endpoint is described with its purpose, request parameters, and example requests and responses.
+This document provides detailed information about the API endpoints available in the Agentic Election Prediction System.
 
 ## Endpoints
 
-### Create Prediction
+### Predictions
 
-- **Endpoint**: `POST /predictions/`
-- **Description**: Creates a new prediction.
-- **Request Parameters**:
-  - `candidate` (string): The name of the candidate.
-  - `probability` (float): The probability of the candidate winning.
-- **Example Request**:
-  ```json
-  {
-    "candidate": "Test Candidate",
-    "probability": 0.75
-  }
-  ```
-- **Example Response**:
-  ```json
-  {
-    "id": 1,
-    "candidate": "Test Candidate",
-    "probability": 0.75,
-    "timestamp": "2023-10-01T12:00:00Z"
-  }
-  ```
+- `POST /api/predictions/`: Create a new prediction
+- `GET /api/predictions/`: List all predictions
+- `GET /api/predictions/{id}`: Get a specific prediction
+- `PUT /api/predictions/{id}`: Update a prediction
+- `DELETE /api/predictions/{id}`: Delete a prediction
 
-### Read Predictions
+### Data Sources
 
-- **Endpoint**: `GET /predictions/`
-- **Description**: Retrieves a list of all predictions.
-- **Request Parameters**:
-  - `skip` (integer, optional): Number of records to skip.
-  - `limit` (integer, optional): Maximum number of records to return.
-- **Example Request**:
-  ```
-  GET /predictions/?skip=0&limit=10
-  ```
-- **Example Response**:
-  ```json
-  [
-    {
-      "id": 1,
-      "candidate": "Test Candidate",
-      "probability": 0.75,
-      "timestamp": "2023-10-01T12:00:00Z"
-    },
-    {
-      "id": 2,
-      "candidate": "Another Candidate",
-      "probability": 0.65,
-      "timestamp": "2023-10-01T12:05:00Z"
-    }
-  ]
-  ```
+- `POST /api/data_sources/`: Add a new data source
+- `GET /api/data_sources/`: List all data sources
+- `GET /api/data_sources/{id}`: Get a specific data source
+- `PUT /api/data_sources/{id}`: Update a data source
+- `DELETE /api/data_sources/{id}`: Delete a data source
 
-### Read Prediction
+### Agent Deployment
 
-- **Endpoint**: `GET /predictions/{id}`
-- **Description**: Retrieves a specific prediction by its ID.
-- **Request Parameters**:
-  - `id` (integer): The ID of the prediction.
-- **Example Request**:
-  ```
-  GET /predictions/1
-  ```
-- **Example Response**:
-  ```json
-  {
-    "id": 1,
-    "candidate": "Test Candidate",
-    "probability": 0.75,
-    "timestamp": "2023-10-01T12:00:00Z"
-  }
-  ```
+- `POST /api/agent_deployment/`: Deploy a new agent
+- `GET /api/agent_deployment/`: List all deployed agents
+- `GET /api/agent_deployment/{id}`: Get a specific agent deployment
+- `PUT /api/agent_deployment/{id}`: Update an agent deployment
+- `DELETE /api/agent_deployment/{id}`: Remove an agent deployment
 
-### Update Prediction
+### Library
 
-- **Endpoint**: `PUT /predictions/{id}`
-- **Description**: Updates an existing prediction.
-- **Request Parameters**:
-  - `id` (integer): The ID of the prediction.
-  - `candidate` (string): The updated name of the candidate.
-  - `probability` (float): The updated probability of the candidate winning.
-- **Example Request**:
-  ```json
-  {
-    "candidate": "Updated Candidate",
-    "probability": 0.8
-  }
-  ```
-- **Example Response**:
-  ```json
-  {
-    "id": 1,
-    "candidate": "Updated Candidate",
-    "probability": 0.8,
-    "timestamp": "2023-10-01T12:00:00Z"
-  }
-  ```
+- `POST /api/library/`: Add a new library item
+- `GET /api/library/`: List all library items
+- `GET /api/library/{id}`: Get a specific library item
+- `PUT /api/library/{id}`: Update a library item
+- `DELETE /api/library/{id}`: Delete a library item
 
-### Delete Prediction
+### Settings
 
-- **Endpoint**: `DELETE /predictions/{id}`
-- **Description**: Deletes a specific prediction by its ID.
-- **Request Parameters**:
-  - `id` (integer): The ID of the prediction.
-- **Example Request**:
-  ```
-  DELETE /predictions/1
-  ```
-- **Example Response**:
-  ```json
-  {
-    "id": 1,
-    "candidate": "Test Candidate",
-    "probability": 0.75,
-    "timestamp": "2023-10-01T12:00:00Z"
-  }
-  ```
+- `POST /api/settings/`: Create a new setting
+- `GET /api/settings/`: List all settings
+- `GET /api/settings/{key}`: Get a specific setting
+- `PUT /api/settings/{key}`: Update a setting
+- `DELETE /api/settings/{key}`: Delete a setting
 
-### Get System Status
+### Tactics
 
-- **Endpoint**: `GET /status/`
-- **Description**: Retrieves the current status of the system.
-- **Example Request**:
-  ```
-  GET /status/
-  ```
-- **Example Response**:
-  ```json
-  {
-    "status": "ok",
-    "uptime": "24 hours"
-  }
-  ```
+- `POST /api/tactics/`: Create a new tactic
+- `GET /api/tactics/`: List all tactics
+- `GET /api/tactics/{id}`: Get a specific tactic
+- `PUT /api/tactics/{id}`: Update a tactic
+- `DELETE /api/tactics/{id}`: Delete a tactic
+
+## Request and Response Formats
+
+### Predictions
+
+#### Create Prediction
+
+Request:

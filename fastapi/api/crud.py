@@ -2,8 +2,6 @@ from sqlalchemy.orm import Session
 from api import models, schemas
 from datetime import datetime
 
-# Existing CRUD operations for Prediction and DataSource...
-
 def create_agent_deployment(db: Session, agent_deployment: schemas.AgentDeploymentCreate):
     db_agent_deployment = models.AgentDeployment(**agent_deployment.dict())
     db.add(db_agent_deployment)
@@ -94,3 +92,34 @@ def delete_setting(db: Session, key: str):
         db.delete(db_setting)
         db.commit()
     return db_setting
+
+def create_tactic(db: Session, tactic: schemas.TacticCreate):
+    db_tactic = models.Tactic(**tactic.dict())
+    db.add(db_tactic)
+    db.commit()
+    db.refresh(db_tactic)
+    return db_tactic
+
+def get_tactic(db: Session, tactic_id: int):
+    return db.query(models.Tactic).filter(models.Tactic.id == tactic_id).first()
+
+def get_tactics(db: Session, skip: int = 0, limit: int = 100):
+    return db.query(models.Tactic).offset(skip).limit(limit).all()
+
+def update_tactic(db: Session, tactic_id: int, tactic: schemas.TacticUpdate):
+    db_tactic = db.query(models.Tactic).filter(models.Tactic.id == tactic_id).first()
+    if db_tactic:
+        update_data = tactic.dict(exclude_unset=True)
+        for key, value in update_data.items():
+            setattr(db_tactic, key, value)
+        db_tactic.updated_at = datetime.utcnow()
+        db.commit()
+        db.refresh(db_tactic)
+    return db_tactic
+
+def delete_tactic(db: Session, tactic_id: int):
+    db_tactic = db.query(models.Tactic).filter(models.Tactic.id == tactic_id).first()
+    if db_tactic:
+        db.delete(db_tactic)
+        db.commit()
+    return db_tactic
